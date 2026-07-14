@@ -1,621 +1,2740 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ôn thi Chính trị — Sư đoàn 324</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@500;600;700;900&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#f5f3ef;--card:#fff;--primary:#1a1a2e;--accent:#e8623a;--success:#2d9e6b;--danger:#e03c3c;--amber:#f0a500;
-  --text:#1a1a2e;--muted:#8a8a9a;--border:#e8e5df;
-}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:60px;font-size:14px}
-.hdr{background:var(--primary);color:#fff;padding:20px 18px 52px;position:relative;overflow:hidden}
-.hdr::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:rgba(232,98,58,.18)}
-.hdr::after{content:'';position:absolute;bottom:-35px;left:28%;width:140px;height:140px;border-radius:50%;background:rgba(240,165,0,.12)}
-.hdr-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.hdr h1{font-size:clamp(1.3rem,3.5vw,2rem);margin-bottom:4px;font-weight:700}
-.hdr p{color:rgba(255,255,255,.5);font-size:.8rem}
-.badge{display:inline-block;background:var(--accent);color:#fff;font-size:.68rem;font-weight:700;padding:2px 10px;border-radius:20px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
-.sync-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(45,158,107,.25);border:1px solid rgba(45,158,107,.4);color:#7fffc0;border-radius:20px;font-size:.68rem;font-weight:600;padding:3px 10px;margin-top:6px}
-.btn-export-hdr{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.25);border-radius:8px;padding:7px 14px;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap;margin-top:20px;display:inline-flex;align-items:center;gap:5px}
-.btn-export-hdr:hover{background:rgba(255,255,255,.22)}
-.wrap{max-width:900px;margin:-30px auto 0;padding:0 14px;position:relative;z-index:2}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
-@media(max-width:560px){.stats{grid-template-columns:1fr 1fr}.stats .sc:last-child{grid-column:span 2}}
-.sc{background:var(--card);border-radius:14px;padding:16px 14px;box-shadow:0 4px 20px rgba(26,26,46,.07);border:1px solid var(--border)}
-.sc.dark{background:var(--primary);border-color:var(--primary)}
-.sc-lbl{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:6px}
-.sc.dark .sc-lbl{color:rgba(255,255,255,.45)}
-.sc-val{font-size:clamp(.95rem,2.5vw,1.35rem);font-weight:700;color:var(--text)}
-.sc.dark .sc-val{color:#fff}
-.sc-unit{font-size:.65rem;color:var(--muted);margin-top:2px}
-.sc.dark .sc-unit{color:rgba(255,255,255,.35)}
-.card{background:var(--card);border-radius:14px;padding:20px;box-shadow:0 4px 20px rgba(26,26,46,.07);border:1px solid var(--border);margin-bottom:18px}
-.ctitle{font-size:1rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:7px}
-.lkbadge{display:inline-flex;align-items:center;gap:3px;font-size:.65rem;background:#fff3cd;color:#856404;border:1px solid #ffe08a;border-radius:20px;padding:2px 8px;font-weight:600}
-hr{border:none;border-top:1px solid var(--border);margin:14px 0}
-.field label{display:block;font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
-.field input{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.875rem;color:var(--text);background:var(--bg);outline:none;transition:border-color .15s;font-family:inherit}
-.field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,98,58,.1)}
-.field input.locked{background:#f0efec;color:var(--muted);cursor:not-allowed;border-style:dashed}
-.sfx{position:relative}.sfx input{padding-right:46px}
-.sfx-lbl{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:.68rem;color:var(--muted);font-weight:700;pointer-events:none}
-.hint{font-size:.67rem;color:var(--muted);margin-top:3px}
-.unlock-row{display:flex;align-items:center;gap:7px;margin-bottom:6px}
-.btn-ul{background:#fff8f0;color:var(--accent);border:1.5px solid #f5d4c3;border-radius:7px;padding:4px 11px;font-size:.72rem;font-weight:700;cursor:pointer;font-family:inherit}
-.btn-ul:hover{background:#fde8db}
-.btn-lk{background:#f0faf5;color:var(--success);border:1.5px solid #c5e8d8;border-radius:7px;padding:4px 11px;font-size:.72rem;font-weight:700;cursor:pointer;font-family:inherit}
-.btn-lk:hover{background:#d4f0e5}
-.fgrid{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}
-@media(max-width:520px){.fgrid{grid-template-columns:1fr 1fr}.fgrid .btn-upd{grid-column:span 2}}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:9px 18px;border-radius:8px;border:none;cursor:pointer;font-size:.82rem;font-weight:700;transition:all .15s;font-family:inherit;white-space:nowrap}
-.btn-pri{background:var(--accent);color:#fff}.btn-pri:hover{background:#d14f28;transform:translateY(-1px)}
-.btn-sec{background:var(--bg);color:var(--text);border:1.5px solid var(--border)}.btn-sec:hover{background:var(--border)}
-.btn-add-row{background:var(--primary);color:#fff;width:100%;padding:11px;border-radius:8px;margin-top:6px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;border:none;transition:background .15s}
-.btn-add-row:hover{background:#2d2d4e}
-/* collapsible */
-.coll-hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;padding:6px 0}
-.coll-arrow{font-size:.7rem;transition:transform .25s;display:inline-block;color:var(--muted)}
-.coll-arrow.open{transform:rotate(180deg)}
-.coll-body{overflow:hidden;transition:max-height .3s ease,opacity .25s;max-height:800px;opacity:1}
-.coll-body.collapsed{max-height:0;opacity:0}
-/* table */
-.tbl-wrap{overflow-x:auto;margin:0 -4px}
-table{width:100%;border-collapse:separate;border-spacing:0;font-size:.82rem}
-thead th{background:var(--bg);color:var(--muted);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;padding:9px 10px;text-align:left;border-bottom:2px solid var(--border)}
-tbody td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:middle;background:#fff}
-tbody tr:last-child td{border-bottom:none}
-tbody tr:hover td{background:#faf9f7}
-td.stt{color:var(--muted);font-weight:700;font-size:.7rem;width:32px;text-align:center}
-td input{width:100%;border:1.5px solid transparent;background:transparent;font-family:inherit;font-size:.82rem;color:var(--text);padding:3px 5px;border-radius:5px;outline:none;transition:border-color .15s,background .15s}
-td input:focus{border-color:var(--accent);background:#fff8f5}
-td input[type=number]{text-align:right}
-td input.cl{pointer-events:none;color:var(--muted)}
-.col-rem{font-weight:700;font-size:.88rem;text-align:right;padding-right:12px;min-width:110px;white-space:nowrap}
-.col-amt{min-width:110px}.col-ct{min-width:130px}.col-dt{min-width:105px}.col-ac{text-align:center;width:40px}
-tr.neg td{background:#fff3f3!important}
-tr.neg .col-rem{color:var(--danger)}
-tr.pos .col-rem{color:var(--success)}
-tr.wkhdr td{background:var(--primary)!important;color:rgba(255,255,255,.85);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:6px 10px;cursor:pointer;user-select:none}
-tr.wkhdr:hover td{background:#2d2d4e!important}
-.wktog{float:right;transition:transform .25s}
-tr.wkhdr.col .wktog{transform:rotate(-90deg)}
-tr.wkd.hid{display:none}
-.btn-del{background:none;border:none;color:var(--muted);cursor:pointer;padding:5px;border-radius:5px;font-size:.9rem;line-height:1;transition:all .15s}
-.btn-del:hover{background:#ffe5e5;color:var(--danger)}
-/* add entries */
-.ae-list{margin-top:12px}
-.ae-item{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f0faf5;border:1px solid #c5e8d8;border-radius:8px;margin-bottom:5px;font-size:.75rem}
-.ae-dt{color:var(--muted);font-size:.7rem;min-width:70px}
-.ae-note{flex:1;color:var(--text)}
-.ae-amt{font-weight:700;color:var(--success);white-space:nowrap}
-.ae-del{background:none;border:none;color:var(--muted);cursor:pointer;padding:2px 5px;border-radius:4px;font-size:.8rem}
-.ae-del:hover{background:#ffe5e5;color:var(--danger)}
-/* unlock bar */
-.ul-bar{display:flex;align-items:center;gap:8px;background:#fff8f0;border:1px solid #f5d4c3;border-radius:8px;padding:9px 12px;margin-bottom:12px;font-size:.78rem;color:var(--muted)}
-.ul-bar.open-bar{background:#f0faf5;border-color:#c5e8d8;color:var(--success)}
-/* toast */
-.toast{position:fixed;bottom:20px;right:20px;background:var(--primary);color:#fff;padding:10px 18px;border-radius:8px;font-size:.8rem;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.2);transform:translateY(70px);opacity:0;transition:all .3s cubic-bezier(.34,1.56,.64,1);z-index:9999;pointer-events:none;max-width:280px}
-.toast.show{transform:translateY(0);opacity:1}
-.toast.ok{background:var(--success)}.toast.warn{background:var(--amber)}.toast.err{background:var(--danger)}
-/* modal overlay */
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:10000;opacity:0;pointer-events:none;transition:opacity .2s}
-.ov.open{opacity:1;pointer-events:all}
-.modal{background:#fff;border-radius:14px;padding:28px 24px;width:min(340px,92vw);box-shadow:0 20px 60px rgba(0,0,0,.2);transform:scale(.92) translateY(16px);transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
-.ov.open .modal{transform:scale(1) translateY(0)}
-.modal h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
-.modal p{font-size:.8rem;color:var(--muted);margin-bottom:14px}
-.modal input[type=password]{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;outline:none;margin-bottom:14px;font-family:inherit;transition:border-color .2s}
-.modal input[type=password]:focus{border-color:var(--accent)}
-.modal-acts{display:flex;gap:8px;justify-content:flex-end}
-.merr{color:var(--danger);font-size:.75rem;margin-top:-8px;margin-bottom:10px;display:none}
-.merr.show{display:block}
-/* export */
-.exp-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:4px}
-.exp-btn{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);cursor:pointer;font-size:.82rem;font-weight:700;color:var(--text);font-family:inherit;text-align:left;transition:all .15s}
-.exp-btn:hover{border-color:var(--accent);background:#fff8f5;color:var(--accent)}
-.exp-btn .ei{font-size:1.3rem}
-.exp-btn small{font-size:.7rem;font-weight:400;color:var(--muted);display:block;margin-top:1px}
-/* note */
-.note{font-size:.68rem;color:var(--muted);margin-top:6px}
-/* sync status */
-#syncStatus{font-size:.7rem;padding:4px 10px;border-radius:20px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
-.sync-ok{background:#d4edda;color:#155724}
-.sync-loading{background:#fff3cd;color:#856404}
-.sync-err{background:#f8d7da;color:#721c24}
+  :root{
+    --bg: #e9e4d4;
+    --bg-soft: #f2efe3;
+    --paper: #faf8f1;
+    --line: #cfc6a8;
+    --ink: #22261e;
+    --ink-soft: #565a4c;
+    --green-deep: #1e3226;
+    --green-mid: #2f5b3d;
+    --green-bright: #3f7d4f;
+    --gold: #b9903f;
+    --gold-bright: #d4ac5c;
+    --red: #9c2b2b;
+    --red-soft: #f4dfd9;
+    --green-soft: #dfe9de;
+    --radius: 14px;
+    --shadow: 0 10px 30px -12px rgba(30,50,38,0.35);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% 0%, rgba(185,144,63,0.10), transparent 45%),
+      radial-gradient(circle at 100% 30%, rgba(47,91,61,0.10), transparent 40%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Be Vietnam Pro', sans-serif;
+    min-height:100vh;
+    line-height:1.5;
+  }
+  h1,h2,h3,.display{
+    font-family:'Noto Serif Display', serif;
+    letter-spacing:0.2px;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace; letter-spacing:0.3px;}
+
+  /* ---------- Header ---------- */
+  header.top{
+    position:sticky; top:0; z-index:50;
+    background:var(--green-deep);
+    color:#f2efe3;
+    box-shadow:0 4px 18px rgba(0,0,0,0.25);
+  }
+  .top-inner{
+    max-width:1100px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 20px;
+    gap:16px; flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .badge-star{
+    width:42px; height:42px; flex:0 0 auto;
+  }
+  .brand-text .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--gold-bright); opacity:0.9;
+  }
+  .brand-text .title{
+    font-size:19px; font-weight:700; margin-top:1px;
+  }
+  nav.tabs{
+    display:flex; gap:6px; background:rgba(255,255,255,0.08);
+    padding:5px; border-radius:999px;
+  }
+  nav.tabs button{
+    border:none; background:transparent; color:#e7e3d3;
+    font-family:'Be Vietnam Pro',sans-serif; font-weight:600; font-size:14px;
+    padding:9px 18px; border-radius:999px; cursor:pointer;
+    transition:background .2s, color .2s;
+    white-space:nowrap;
+  }
+  nav.tabs button.active{
+    background:var(--gold); color:#26210f;
+  }
+  nav.tabs button:not(.active):hover{ background:rgba(255,255,255,0.12); }
+
+  main{max-width:1100px; margin:0 auto; padding:34px 20px 90px;}
+
+  /* ---------- Section intro ---------- */
+  .section-intro{margin-bottom:26px;}
+  .section-intro h2{font-size:26px; margin:0 0 6px; color:var(--green-deep);}
+  .section-intro p{margin:0; color:var(--ink-soft); font-size:15px; max-width:640px;}
+
+  /* ---------- Exam picker cards ---------- */
+  .picker-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px; margin-top:20px;
+  }
+  .exam-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px 20px;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .exam-card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:5px;
+    background:linear-gradient(90deg, var(--green-mid), var(--gold));
+  }
+  .exam-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--gold); }
+  .exam-card .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:1.5px;
+    color:var(--gold); text-transform:uppercase; font-weight:600;
+  }
+  .exam-card h3{ font-size:22px; margin:6px 0 10px; color:var(--green-deep);}
+  .exam-card .meta{ font-size:13px; color:var(--ink-soft); display:flex; gap:14px;}
+  .exam-card .best{
+    margin-top:14px; font-size:12.5px; color:var(--green-mid); font-weight:600;
+    display:flex; align-items:center; gap:6px;
+  }
+  .exam-card .go{
+    margin-top:16px; font-weight:700; color:var(--green-deep); font-size:14px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .exam-card .go svg{ width:14px; height:14px; transition:transform .18s; }
+  .exam-card:hover .go svg{ transform:translateX(4px); }
+
+  /* ---------- Progress / score strip ---------- */
+  .quiz-toolbar{
+    position:sticky; top:66px; z-index:40;
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:14px 18px;
+    display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+    margin-bottom:24px;
+    box-shadow:0 6px 18px -10px rgba(0,0,0,0.15);
+  }
+  .quiz-toolbar .back-btn{
+    border:1px solid var(--line); background:var(--paper); color:var(--ink);
+    padding:8px 14px; border-radius:999px; font-weight:600; font-size:13px;
+    cursor:pointer; display:flex; align-items:center; gap:6px;
+  }
+  .quiz-toolbar .back-btn:hover{ border-color:var(--green-mid); }
+  .quiz-toolbar .title{ font-weight:700; color:var(--green-deep); font-size:15px; margin-right:auto;}
+  .stars-row{ display:flex; gap:3px; }
+  .stars-row svg{ width:16px; height:16px; }
+  .score-pill{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px;
+    background:var(--green-deep); color:#f2efe3; padding:6px 12px; border-radius:999px;
+  }
+  .timer-pill{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px;
+    background:var(--red); color:#fff; padding:6px 12px; border-radius:999px;
+    letter-spacing:1px;
+  }
+  .progress-bar-track{
+    width:100%; height:6px; background:var(--line); border-radius:999px; overflow:hidden;
+    margin-top:10px; flex-basis:100%;
+  }
+  .progress-bar-fill{
+    height:100%; background:linear-gradient(90deg,var(--green-mid),var(--gold)); width:0%;
+    transition:width .25s ease;
+  }
+
+  /* ---------- Question card ---------- */
+  .qcard{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px 22px 20px;
+    margin-bottom:16px;
+  }
+  .qcard .qhead{
+    display:flex; align-items:baseline; gap:10px; margin-bottom:12px;
+  }
+  .qcard .qnum{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--gold);
+    font-size:13px; flex:0 0 auto; background:var(--green-deep); color:#f2efe3;
+    padding:3px 9px; border-radius:6px;
+  }
+  .qcard .qtext{ font-size:16.5px; font-weight:600; color:var(--ink); line-height:1.5;}
+  .options{ display:flex; flex-direction:column; gap:9px; }
+  .option{
+    display:flex; align-items:flex-start; gap:11px;
+    border:1.5px solid var(--line); border-radius:10px;
+    padding:11px 14px; cursor:pointer;
+    background:#fff; font-size:15px; color:var(--ink);
+    transition:border-color .15s, background .15s, transform .1s;
+  }
+  .option:hover{ border-color:var(--green-mid); }
+  .option .letter{
+    flex:0 0 auto; width:24px; height:24px; border-radius:50%;
+    border:1.5px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; color:var(--ink-soft);
+    background:var(--bg-soft);
+  }
+  .option .otext{ padding-top:1px; }
+  .option.locked{ cursor:default; }
+  .option.correct{ border-color:var(--green-mid); background:var(--green-soft); }
+  .option.correct .letter{ background:var(--green-mid); color:#fff; border-color:var(--green-mid); }
+  .option.wrong{ border-color:var(--red); background:var(--red-soft); }
+  .option.wrong .letter{ background:var(--red); color:#fff; border-color:var(--red); }
+  .option.dim{ opacity:0.55; }
+  .option .mark{ margin-left:auto; font-weight:700; font-size:13px; flex:0 0 auto; }
+  .option.correct .mark{ color:var(--green-mid); }
+  .option.wrong .mark{ color:var(--red); }
+
+  .test-actions{
+    display:flex; justify-content:center; margin:30px 0 10px;
+  }
+  .btn-primary{
+    background:var(--green-deep); color:#f2efe3; border:none;
+    font-family:'Be Vietnam Pro',sans-serif; font-weight:700; font-size:15.5px;
+    padding:14px 34px; border-radius:999px; cursor:pointer;
+    box-shadow:var(--shadow);
+    transition:transform .15s, background .15s;
+  }
+  .btn-primary:hover{ background:var(--green-mid); transform:translateY(-2px); }
+  .btn-ghost{
+    background:transparent; border:1.5px solid var(--green-deep); color:var(--green-deep);
+    font-weight:700; font-size:14.5px; padding:12px 26px; border-radius:999px; cursor:pointer;
+  }
+  .btn-ghost:hover{ background:var(--green-deep); color:#fff;}
+  .unanswered-note{
+    text-align:center; color:var(--red); font-size:13.5px; font-weight:600; margin-top:-14px; margin-bottom:16px;
+  }
+
+  /* ---------- Results ---------- */
+  .result-wrap{ text-align:center; padding:10px 0 26px; }
+  .seal{
+    width:150px; height:150px; margin:0 auto 18px;
+    position:relative;
+  }
+  .result-headline{ font-size:28px; color:var(--green-deep); margin:0 0 4px;}
+  .result-sub{ color:var(--ink-soft); font-size:15px; margin-bottom:22px;}
+  .result-stats{
+    display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:28px;
+  }
+  .stat-box{
+    background:var(--paper); border:1px solid var(--line); border-radius:12px;
+    padding:14px 22px; min-width:110px;
+  }
+  .stat-box .num{ font-family:'IBM Plex Mono',monospace; font-size:22px; font-weight:600; color:var(--green-deep);}
+  .stat-box .lbl{ font-size:12px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:1px; margin-top:2px;}
+  .stat-box.wrong .num{ color:var(--red); }
+
+  .review-list{ text-align:left; }
+  .review-item{
+    background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin-bottom:12px;
+  }
+  .review-item .qtext{ font-weight:600; margin-bottom:8px; font-size:15.5px;}
+  .review-line{ font-size:14px; margin-bottom:3px; padding-left:2px; }
+  .review-line.your-wrong{ color:var(--red); }
+  .review-line.correct{ color:var(--green-mid); }
+  .review-badge{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600;
+    padding:2px 8px; border-radius:6px; margin-bottom:8px;
+  }
+  .review-badge.ok{ background:var(--green-soft); color:var(--green-mid); }
+  .review-badge.no{ background:var(--red-soft); color:var(--red); }
+
+  footer.site-footer{
+    text-align:center; color:var(--ink-soft); font-size:12.5px; padding:26px 20px 40px;
+  }
+
+  .hidden{ display:none !important; }
+
+  @media (max-width: 640px){
+    .top-inner{ flex-direction:column; align-items:flex-start; }
+    nav.tabs{ width:100%; overflow-x:auto; }
+    .quiz-toolbar{ top:120px; }
+  }
 </style>
 </head>
 <body>
 
-<div class="hdr">
-  <div class="hdr-inner">
-    <div>
-      <div class="badge" id="monthBadge">Tháng 5 · 2025</div>
-      <h1>💳 Quản Lý Chi Tiêu</h1>
-      <p>Dữ liệu dùng chung — ai vào link đều thấy</p>
-      <div class="sync-badge" id="syncStatus"><span>●</span> <span id="syncTxt">Đang tải...</span></div>
-    </div>
-    <button class="btn-export-hdr" onclick="openExport()">📤 Xuất dữ liệu</button>
-  </div>
-</div>
-
-<div class="wrap">
-  <div class="stats">
-    <div class="sc dark"><div class="sc-lbl">💰 Tổng quỹ</div><div class="sc-val" id="sTotalFund">—</div><div class="sc-unit">nghìn đồng</div></div>
-    <div class="sc"><div class="sc-lbl" style="color:var(--danger)">📤 Đã chi</div><div class="sc-val" style="color:var(--danger)" id="sTotalSpent">—</div><div class="sc-unit">nghìn đồng</div></div>
-    <div class="sc"><div class="sc-lbl" style="color:var(--success)">🏦 Còn lại</div><div class="sc-val" style="color:var(--success)" id="sTotalLeft">—</div><div class="sc-unit">nghìn đồng</div></div>
-  </div>
-
-  <!-- FUND CARD -->
-  <div class="card">
-    <div class="ctitle">💵 Quản lý quỹ <span class="lkbadge">🔒 Bảo mật</span></div>
-
-    <!-- Tiền gốc -->
-    <div style="margin-bottom:16px">
-      <div class="unlock-row">
-        <span style="font-size:.78rem;color:var(--muted);font-weight:700">Tiền gốc ban đầu</span>
-        <button class="btn-ul" id="btnUlInit" onclick="reqUnlock('init')">🔓 Mở khoá</button>
-        <button class="btn-lk" id="btnLkInit" onclick="lockSec('init')" style="display:none">🔒 Khoá lại</button>
-      </div>
-      <div class="fgrid">
-        <div class="field" style="grid-column:span 2">
-          <label>Tiền gốc (nghìn đồng)</label>
-          <div class="sfx"><input type="number" id="inpInit" placeholder="VD: 5000 = 5.000.000 đ" min="0" class="locked" readonly oninput="hintInit()"/><span class="sfx-lbl">K đ</span></div>
-          <div class="hint" id="hintInit"></div>
-        </div>
-        <button class="btn btn-pri btn-upd" onclick="reqSetInit()">✓ Đặt</button>
-      </div>
-      <p class="note">* Đơn vị: 1 = 1.000 đ. Ví dụ 5000 = 5.000.000 đ. Cần mật khẩu để thay đổi.</p>
-    </div>
-
-    <hr/>
-
-    <!-- Thêm tiền - collapsible -->
-    <div>
-      <div class="coll-hdr" onclick="toggleAddSec()">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="font-weight:700;font-size:.85rem">➕ Thêm tiền vào quỹ</span>
-          <button class="btn-ul" id="btnUlAdd" onclick="event.stopPropagation();reqUnlock('add')" style="font-size:.67rem;padding:3px 9px">🔓 Mở khoá</button>
-          <button class="btn-lk" id="btnLkAdd" onclick="event.stopPropagation();lockSec('add')" style="display:none;font-size:.67rem;padding:3px 9px">🔒 Khoá</button>
-        </div>
-        <span style="font-size:.72rem;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:4px">
-          <span id="addSecLbl">Thu gọn</span>
-          <span class="coll-arrow open" id="addArrow">▲</span>
-        </span>
-      </div>
-      <div class="coll-body" id="addBody">
-        <div style="padding-top:10px;display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end">
-          <div class="field">
-            <label>Số tiền (K đ)</label>
-            <div class="sfx"><input type="number" id="inpAddAmt" placeholder="Số tiền" min="0" class="locked" readonly oninput="hintAdd()"/><span class="sfx-lbl">K đ</span></div>
-            <div class="hint" id="hintAdd"></div>
-          </div>
-          <div class="field">
-            <label>Ghi chú</label>
-            <input type="text" id="inpAddNote" placeholder="VD: Lương tháng 5" class="locked" readonly/>
-          </div>
-          <button class="btn btn-pri" onclick="reqAddFund()" style="align-self:flex-end;padding:10px 16px">+ Thêm</button>
-        </div>
-        <p class="note" style="margin-top:6px">* Cần mở khoá trước khi điền thông tin thêm tiền.</p>
-        <div class="ae-list" id="aeList"></div>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <svg class="badge-star" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="47" fill="#c6a15b" opacity="0.15"/>
+        <circle cx="50" cy="50" r="47" fill="none" stroke="#d4ac5c" stroke-width="2"/>
+        <path d="M50 18 L58 40 L82 40 L62 54 L70 76 L50 62 L30 76 L38 54 L18 40 L42 40 Z" fill="#d4ac5c"/>
+      </svg>
+      <div class="brand-text">
+        <div class="eyebrow">Sư đoàn 324 · Tài liệu chính trị</div>
+        <div class="title">Ôn thi Nhận thức Chính trị</div>
       </div>
     </div>
+    <nav class="tabs">
+      <button id="tab-practice" class="active">Ôn luyện</button>
+      <button id="tab-test">Thi thật</button>
+    </nav>
   </div>
+</header>
 
-  <!-- EXPENSE TABLE -->
-  <div class="card">
-    <div class="ctitle" style="flex-wrap:wrap;gap:6px">
-      📋 Chi tiết chi tiêu
-      <span class="lkbadge">🔒 Bảo mật</span>
-      <button class="btn btn-sec" style="margin-left:auto;font-size:.7rem;padding:4px 10px" onclick="toggleAllWeeks()">⇅ Thu/Mở tuần</button>
+<main>
+
+  <!-- ============ PRACTICE HOME ============ -->
+  <section id="practice-home">
+    <div class="section-intro">
+      <h2>Ôn luyện</h2>
+      <p>Chọn một đề để ôn tập. Chọn đáp án ở mỗi câu sẽ hiện kết quả đúng/sai ngay lập tức. Thứ tự câu hỏi và đáp án được xáo trộn mỗi lần vào đề.</p>
     </div>
-    <div class="ul-bar" id="tblUnlockBar">
-      🔒 Ô <strong>số tiền</strong> đang khoá. Mở khoá để chỉnh sửa.
-      <button class="btn-ul" style="margin-left:auto" onclick="reqUnlock('tbl')">🔓 Mở khoá</button>
+    <div class="picker-grid" id="practice-grid"></div>
+  </section>
+
+  <!-- ============ PRACTICE QUIZ ============ -->
+  <section id="practice-quiz" class="hidden">
+    <div class="quiz-toolbar">
+      <button class="back-btn" onclick="exitToHome('practice')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        Quay lại
+      </button>
+      <div class="title" id="practice-title">Đề số 1</div>
+      <div class="score-pill" id="practice-score">0 / 0 đúng</div>
+      <div class="progress-bar-track"><div class="progress-bar-fill" id="practice-progress"></div></div>
     </div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr>
-          <th>STT</th><th class="col-dt">Ngày</th><th class="col-ct">Nội dung</th>
-          <th class="col-amt" style="text-align:right">Số tiền (K đ)</th>
-          <th class="col-rem">Còn lại (K đ)</th><th class="col-ac">Xóa</th>
-        </tr></thead>
-        <tbody id="tblBody"></tbody>
-      </table>
-      <div id="emptyState" style="text-align:center;padding:36px 20px;color:var(--muted);display:none">
-        <div style="font-size:2rem;margin-bottom:8px">📂</div>
-        <p style="font-size:.8rem">Chưa có khoản chi tiêu nào.<br>Nhấn nút bên dưới để thêm!</p>
+    <div id="practice-questions"></div>
+  </section>
+
+  <!-- ============ TEST HOME ============ -->
+  <section id="test-home" class="hidden">
+    <div class="section-intro">
+      <h2>Thi thật</h2>
+      <p>Chọn một đề để làm bài thi đầy đủ 50 câu. Đáp án chỉ hiển thị sau khi nộp bài. Có tính thời gian như thi thật.</p>
+    </div>
+    <div class="picker-grid" id="test-grid"></div>
+  </section>
+
+  <!-- ============ TEST QUIZ ============ -->
+  <section id="test-quiz" class="hidden">
+    <div class="quiz-toolbar">
+      <button class="back-btn" onclick="confirmExitTest()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        Thoát
+      </button>
+      <div class="title" id="test-title">Đề số 1</div>
+      <div class="timer-pill" id="test-timer">40:00</div>
+      <div class="score-pill" id="test-answered">0 / 50 đã chọn</div>
+      <div class="progress-bar-track"><div class="progress-bar-fill" id="test-progress"></div></div>
+    </div>
+    <div id="test-questions"></div>
+    <div class="unanswered-note hidden" id="test-warning">Bạn chưa trả lời hết tất cả các câu hỏi.</div>
+    <div class="test-actions">
+      <button class="btn-primary" id="test-submit-btn" onclick="submitTest()">Nộp bài</button>
+    </div>
+  </section>
+
+  <!-- ============ TEST RESULT ============ -->
+  <section id="test-result" class="hidden">
+    <div class="result-wrap">
+      <svg class="seal" viewBox="0 0 100 100" id="seal-svg">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#9c2b2b" stroke-width="2.5" stroke-dasharray="4 3"/>
+        <circle cx="50" cy="50" r="38" fill="#9c2b2b" opacity="0.08"/>
+        <text x="50" y="46" text-anchor="middle" font-family="IBM Plex Mono" font-size="22" font-weight="700" fill="#1e3226" id="seal-score">0%</text>
+        <text x="50" y="63" text-anchor="middle" font-family="IBM Plex Mono" font-size="8" fill="#565a4c">KẾT QUẢ</text>
+      </svg>
+      <h2 class="result-headline" id="result-headline">Hoàn thành bài thi</h2>
+      <p class="result-sub" id="result-sub"></p>
+      <div class="result-stats">
+        <div class="stat-box"><div class="num" id="stat-correct">0</div><div class="lbl">Câu đúng</div></div>
+        <div class="stat-box wrong"><div class="num" id="stat-wrong">0</div><div class="lbl">Câu sai</div></div>
+        <div class="stat-box"><div class="num" id="stat-time">0:00</div><div class="lbl">Thời gian làm</div></div>
+      </div>
+      <div style="display:flex; gap:12px; justify-content:center; margin-bottom:34px; flex-wrap:wrap;">
+        <button class="btn-primary" onclick="retryTest()">Làm lại đề này</button>
+        <button class="btn-ghost" onclick="exitToHome('test')">Chọn đề khác</button>
       </div>
     </div>
-    <hr/>
-    <button class="btn-add-row" onclick="reqAddRow()">＋ Thêm dòng chi tiêu</button>
-  </div>
-</div>
+    <div class="review-list" id="review-list"></div>
+  </section>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+</main>
 
-<!-- PW MODAL -->
-<div class="ov" id="pwOv">
-  <div class="modal">
-    <h3>🔐 Xác thực</h3>
-    <p id="pwDesc">Nhập mật khẩu để thực hiện thao tác này.</p>
-    <input type="password" id="pwInp" placeholder="Mật khẩu" onkeydown="if(event.key==='Enter')confirmPw()"/>
-    <div class="merr" id="pwErr">❌ Mật khẩu không đúng!</div>
-    <div class="modal-acts">
-      <button class="btn btn-sec" onclick="closePw()">Hủy</button>
-      <button class="btn btn-pri" onclick="confirmPw()">Xác nhận</button>
-    </div>
-  </div>
-</div>
-
-<!-- EXPORT MODAL -->
-<div class="ov" id="expOv">
-  <div class="modal" style="width:min(400px,92vw)">
-    <h3>📤 Xuất dữ liệu</h3>
-    <p>Chọn định dạng xuất toàn bộ chi tiêu:</p>
-    <div class="exp-opts">
-      <button class="exp-btn" onclick="expCSV()"><span class="ei">📊</span><span>Xuất CSV<small>Mở được bằng Excel, Google Sheets</small></span></button>
-      <button class="exp-btn" onclick="expJSON()"><span class="ei">🗂️</span><span>Xuất JSON<small>Dữ liệu thô, dễ sao lưu</small></span></button>
-      <button class="exp-btn" onclick="expTXT()"><span class="ei">📄</span><span>Xuất TXT<small>Bảng văn bản đọc được mọi nơi</small></span></button>
-    </div>
-    <div class="modal-acts" style="margin-top:10px">
-      <button class="btn btn-sec" onclick="closeExp()">Đóng</button>
-    </div>
-  </div>
-</div>
+<footer class="site-footer">
+  Tài liệu ôn tập nội bộ — Đại đội 1, Tiểu đoàn 16, Sư đoàn 324
+</footer>
 
 <script>
-const PW = '123';
-const STORAGE_KEY = 'chiTieu_shared_v1';
-
-let state = { initialFund:0, totalFund:0, addEntries:[], rows:[] };
-let ul = { init:false, add:false, tbl:false };
-let wkCol = {};
-let allCol = false;
-let addOpen = true;
-let _pending = null;
-let _saving = false;
-
-/* ---- STORAGE (shared) ---- */
-async function loadData() {
-  setSyncStatus('loading','Đang tải...');
-  try {
-    const r = await window.storage.get(STORAGE_KEY, true);
-    if (r && r.value) {
-      const p = JSON.parse(r.value);
-      state = { addEntries:[], rows:[], ...p };
+/* ================= EXAM DATA ================= */
+const EXAMS_RAW = {
+  "de1": [
+    {
+      "question": "Theo Hướng dẫn số 01-HD/TW, việc xác nhận kết quả thẩm tra lý lịch của người vào Đảng khi gửi theo đường công văn trong nước không được chậm quá bao nhiêu ngày làm việc kể từ khi nhận được công văn đề nghị thẩm tra?",
+      "options": [
+        "15 ngày làm việc",
+        "20 ngày làm việc",
+        "30 ngày làm việc",
+        "45 ngày làm việc"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đảng viên dự bị phải viết bản tự kiểm điểm đề nghị công nhận đảng viên chính thức sau thời gian:",
+      "options": [
+        "10 tháng kể từ ngày kết nạp.",
+        "11 tháng kể từ ngày kết nạp.",
+        "12 tháng kể từ ngày chi bộ kết nạp.",
+        "12 tháng kể từ ngày cấp ủy ra quyết định kết nạp."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định số 366-QĐ/TW, trong mục đích của công tác kiểm điểm, đánh giá, nội dung nào được nêu trước?",
+      "options": [
+        "Xây dựng tiêu chí đánh giá.",
+        "Bảo đảm sự thống nhất, đồng bộ.",
+        "Phát hiện, xử lý vi phạm.",
+        "Đổi mới phương pháp đánh giá."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định, đảng viên là người có công với cách mạng, đảng viên hưởng trợ cấp bệnh binh, trợ cấp mất sức lao động, trợ cấp bảo trợ xã hội hằng tháng thì mức đóng đảng phí bằng:",
+      "options": [
+        "30% mức quy định.",
+        "40% mức quy định.",
+        "50% mức quy định.",
+        "70% mức quy định."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định, trong thời gian từ 01/01/2026 đến hết 31/12/2027, mức đóng đảng phí của đảng viên đã đến tuổi nghỉ hưu trong điều kiện lao động bình thường bằng:",
+      "options": [
+        "0,1% mức lương tối thiểu tháng theo vùng.",
+        "0,2% mức lương tối thiểu tháng theo vùng.",
+        "0,3% mức lương tối thiểu tháng theo vùng.",
+        "0,5% mức lương tối thiểu tháng theo vùng."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, đảng ủy cơ sở có từ bao nhiêu ủy viên trở lên thì bầu ban thường vụ?",
+      "options": [
+        "5 ủy viên.",
+        "7 ủy viên.",
+        "9 ủy viên.",
+        "11 ủy viên."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, chi bộ có đông đảng viên được bầu chi ủy không quá bao nhiêu ủy viên?",
+      "options": [
+        "5 ủy viên.",
+        "7 ủy viên.",
+        "9 ủy viên.",
+        "11 ủy viên."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, căn cứ chủ yếu để xác định mô hình tổ chức đảng trong Quân đội là:",
+      "options": [
+        "Số lượng đảng viên của đơn vị.",
+        "Cấp quản lý cán bộ.",
+        "Tổ chức biên chế và nhiệm vụ của đơn vị.",
+        "Địa bàn đóng quân của đơn vị."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, nội dung nào sau đây là đúng?",
+      "options": [
+        "Mọi đảng ủy cơ sở đều có ban thường vụ.",
+        "Mọi chi bộ đều có chi ủy.",
+        "Đảng ủy bộ phận đều có ban thường vụ.",
+        "Chỉ đảng ủy cơ sở có từ 09 cấp ủy viên trở lên mới bầu ban thường vụ."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Quy định số 21-QĐ/TW, ngày 11/4/2026 của Ban Chấp hành Trung ương Quy định về công tác Kiểm tra, giám sát và kỷ luật Đảng, các hình thức kỷ luật đối với tổ chức đảng gồm?",
+      "options": [
+        "Khiển trách, cảnh cáo, xóa tên",
+        "Khiển trách, cảnh cáo, giải tán",
+        "Khiển trách, cảnh cáo, giải thể",
+        "Khiển trách, cảnh cáo"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Quy định số 21-QĐ/TW, ngày 11/4/2026 của Ban Chấp hành Trung ương Quy định về công tác Kiểm tra, giám sát và kỷ luật Đảng, các hình thức kỷ luật đối với đảng viên dự bị gồm?",
+      "options": [
+        "Khiển trách, cảnh cáo, cách chức, khai trừ",
+        "Khiển trách, cảnh cáo, xoá tên",
+        "Khiển trách, cảnh cáo",
+        "Khiển trách, cảnh cáo, cách chức"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đảng viên vi phạm một trong các trường hợp nào sau đây thì cấp uỷ và uỷ ban kiểm tra có thẩm quyền trực tiếp xem xét, quyết định kỷ luật, không cần yêu cầu đảng viên đó phải kiểm điểm trước chi bộ?",
+      "options": [
+        "Vi phạm khi thực hiện nhiệm vụ cấp trên giao; nội dung vi phạm liên quan đến bí mật của Đảng và Nhà nước mà chi bộ không biết; vi phạm trước khi chuyển đến sinh hoạt ở chi bộ; vi phạm pháp luật đang bị khởi tố, tạm giam, truy nã, truy tố, xét xử.",
+        "Suy thoái về đạo đức, lối sống; vi phạm kỷ luật nghiêm trọng.",
+        "Vi phạm kỷ luật không gây hậu quả nghiêm trọng.",
+        "Cả 3 đáp án trên đều đúng."
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Tổ chức đảng cấp dưới được uỷ quyền chậm nhất bao nhiêu ngày kể từ ngày nhận được uỷ quyền phải công bố quyết định cho tổ chức đảng, đảng viên bị kỷ luật hoặc khiếu nại kỷ luật. Nếu quá hạn trên phải báo cáo ngay với cấp có thẩm quyền quyết định?",
+      "options": [
+        "05 ngày",
+        "10 ngày",
+        "15 ngày",
+        "20 ngày"
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Quy định số 21-QĐ/TW, ngày 11/4/2026 của Ban Chấp hành Trung ương Quy định về công tác Kiểm tra, giám sát và kỷ luật Đảng ban hành ngày, tháng, năm nào?",
+      "options": [
+        "Ngày 09/6/2025",
+        "Ngày 27/6/2025",
+        "Ngày 11/4/2026",
+        "Ngày 08/4/2026"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định số 69-QĐ/TW của Bộ Chính trị về kỷ luật tổ chức đảng, đảng viên vi phạm, có mấy tình tiết giảm nhẹ mức kỷ luật đối với tổ chức đảng?",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, đảng ủy cơ sở có 08 cấp ủy viên thì:",
+      "options": [
+        "Được bầu ban thường vụ.",
+        "Không bầu ban thường vụ.",
+        "Được bầu không quá 03 ủy viên ban thường vụ.",
+        "Do cấp trên quyết định."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Kết luận số 01-KL/TW ngày 18/5/2021 của Bộ Chính trị nói về vấn đề gì?",
+      "options": [
+        "Về tiếp tục học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh trong giai đoạn mới.",
+        "Về xây dựng Đảng và hệ thống chính trị, ngăn chặn “tự diễn biến”, “tự chuyển hóa” trong nội bộ.",
+        "Về tiếp tục thực hiện Chỉ thị số 05-CT/TW của Bộ Chính trị “Về đẩy mạnh học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh”.",
+        "Về thi hành điều lệ Đảng."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, nội dung nào sau đây là đúng?",
+      "options": [
+        "Mọi đảng ủy cơ sở đều có ban thường vụ.",
+        "Mọi chi bộ đều có chi ủy.",
+        "Đảng ủy bộ phận đều có ban thường vụ.",
+        "Chỉ đảng ủy cơ sở có từ 09 cấp ủy viên trở lên mới bầu ban thường vụ."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Theo Kết luận số 21-KL/TW, mục tiêu của công tác xây dựng, chỉnh đốn Đảng nhằm trực tiếp nâng cao năng lực nào của Đảng?",
+      "options": [
+        "Năng lực lãnh đạo, sức chiến đấu của tổ chức cơ sở đảng.",
+        "Năng lực lãnh đạo, năng lực cầm quyền, sức chiến đấu của Đảng.",
+        "Năng lực quản lý nhà nước và sức chiến đấu của Đảng.",
+        "Năng lực lãnh đạo và hiệu lực quản lý của chính quyền."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Kết luận số 21-KL/TW yêu cầu kiên quyết đấu tranh chống nội dung nào dưới đây?",
+      "options": [
+        "Chủ nghĩa cơ hội.",
+        "Chủ nghĩa cá nhân.",
+        "Chủ nghĩa bảo thủ.",
+        "Chủ nghĩa hình thức."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn số 5119/HD-CT, ngày 25/12/2025 của Tổng cục Chính trị, quy định thời gian một buổi sinh hoạt thường kỳ hằng tháng đối với cấp chi bộ là bao nhiêu phút?",
+      "options": [
+        "Tối thiểu 90 phút đối với chi bộ có chi ủy, tối thiểu 60 phút đối với chi bộ không có chi uỷ.",
+        "Tối thiểu 120 phút đối với chi bộ có chi ủy, tối thiểu 90 phút đối với chi bộ không có chi ủy.",
+        "Không quá 60 phút đối với chi bộ không có chi ủy, không quá 90 phút đối với chi bộ có chi ủy.",
+        "Không quá 120 phút đối với chi bộ có chi ủy, không quá 90 phút đối với chi bộ không có chi ủy."
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn số 1031/HD-CT của TCCT về một số vấn đề về nghị quyết và chế độ ra nghị quyết lãnh đạo của các cấp uỷ, chi bộ trong Đảng bộ Quân đội có mấy loại Nghị quyết cơ bản?",
+      "options": [
+        "Có 2 loại nghị quyết cơ bản",
+        "Có 3 loại nghị quyết cơ bản",
+        "Có 4 loại nghị quyết cơ bản",
+        "Có 5 loại nghị quyết cơ bản"
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Theo Kết luận số 21-KL/TW, đối tượng phải ngăn chặn, đẩy lùi và xử lý nghiêm là:",
+      "options": [
+        "Cán bộ suy thoái về đạo đức, lối sống.",
+        "Đảng viên suy thoái về tư tưởng chính trị.",
+        "Cán bộ, đảng viên suy thoái về tư tưởng chính trị, đạo đức, lối sống; biểu hiện “tự diễn biến”, “tự chuyển hóa”.",
+        "Tổ chức đảng yếu kém kéo dài."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết Hướng dẫn số 2800/HD-SĐ của Sư đoàn về đăng ký sổ sách, văn kiện CTĐ, CTCT năm 2026, dung lượng dự thảo nghị quyết tháng khoảng bao nhiêu trang A4?",
+      "options": [
+        "2-3 trang A4",
+        "Không quá 3 trang A4",
+        "Không quá 4 trang A4",
+        "3-5 trang A4"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đồng chí cho biết quy trình ra nghị quyết có mấy bước?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Hướng dẫn số 2800-HD/CT ngày 12/12/2025 của Phòng Chính trị Sư đoàn, bố cục Nghị quyết gồm mấy phần?",
+      "options": [
+        "02 phần",
+        "03 phần",
+        "04 phần",
+        "05 phần"
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Theo Kết luận số 21-KL/TW, nguyên nhân nào sau đây được nêu đối với một số cấp ủy, tổ chức đảng, cán bộ lãnh đạo, quản lý?",
+      "options": [
+        "Chưa phát huy dân chủ trực tiếp ở cơ sở.",
+        "Còn thụ động, trông chờ vào sự chỉ đạo, hướng dẫn của cấp trên.",
+        "Thiếu cán bộ có trình độ chuyên môn cao.",
+        "Chưa có cơ chế phối hợp liên ngành."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Hướng dẫn, sinh hoạt chi bộ thường kỳ hằng tháng được gắn với sinh hoạt ngày Đảng, ngày chính trị và văn hóa tinh thần vào thời điểm nào?",
+      "options": [
+        "Thứ Hai tuần đầu tháng",
+        "Thứ Tư tuần đầu tháng",
+        "Thứ Năm tuần đầu tháng",
+        "Thứ Sáu tuần cuối tháng"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đầu năm hoặc đầu quý, chi bộ phải xây dựng kế hoạch gì để báo cáo cấp ủy cấp trên trực tiếp theo dõi, chỉ đạo?",
+      "options": [
+        "Kế hoạch kiểm tra, giám sát",
+        "Kế hoạch phát triển đảng viên",
+        "Kế hoạch sinh hoạt chuyên đề",
+        "Kế hoạch giáo dục chính trị"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Trong tháng tổ chức sinh hoạt chuyên đề và sinh hoạt thường kỳ cùng một buổi thì thời gian tối thiểu là:",
+      "options": [
+        "90 phút",
+        "100 phút",
+        "110 phút",
+        "120 phút"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Thời gian dành để thông báo thời sự, quán triệt nghị quyết của cấp trên trong một buổi sinh hoạt chi bộ không được quá:",
+      "options": [
+        "15 phút",
+        "20 phút",
+        "30 phút",
+        "45 phút"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết Chỉ thị số 732-CT/ĐU của Thường vụ Đảng ủy Quân khu về xây dựng “Chi bộ bốn tốt”,“Đảng bộ cơ sở bốn tốt” ban hành ngày, tháng, năm nào?",
+      "options": [
+        "Ngày 10/12/2022",
+        "Ngày 11/12/2022",
+        "Ngày 12/12/2022",
+        "Ngày 13/12/2022"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết nội dung “Chi bộ bốn tốt”, “Đảng bộ cơ sở bốn tốt” theo Chỉ thị 732 của Thường vụ Đảng ủy Quân khu về xây dựng chi bộ bốn tốt”, “đảng bộ cơ sở bốn tốt”?",
+      "options": [
+        "Hoàn thành tốt nhiệm vụ được giao; chất lượng sinh hoạt tốt; đoàn kết, kỷ luật tốt; cán bộ, đảng viên tốt.",
+        "Hoàn thành tốt nhiệm vụ chính trị; chất lượng sinh hoạt tốt; chấp hành kỷ luật tốt; cán bộ, đảng viên tốt.",
+        "Hoàn thành tốt nhiệm vụ chính trị; chất lượng sinh hoạt tốt; đoàn kết, kỷ luật tốt; cán bộ, đảng viên tốt.",
+        "Hoàn thành tốt nhiệm vụ chính trị; chất lượng sinh hoạt tốt; đoàn kết tốt, kỷ luật nghiêm; cán bộ, đảng viên tốt."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biêt theo Hướng dẫn 2292/HD-CT ngày 21/12/2017 của TCCT về Hướng dẫn CTĐ, CTCT trong chuyển TTSSCĐ của QĐND và DQTV quy định thời gian họp cấp ủy, chi bộ ở trạng thái SSCĐ cao là bao nhiêu?",
+      "options": [
+        "Không quá 60 phút",
+        "Không quá 45 phút",
+        "Không quá 30 phút",
+        "Không quá 20 phút"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn 144/HD-CT của Phòng Chính trị Sư đoàn về CTĐ, CTCT trong chuyển TTSSCĐ cấp Trung đoàn, Tiểu đoàn, Đại đội, tổ chức họp cấp uỷ, chi bộ ra nghị quyết lãnh đạo đơn vị thực hiện nhiệm vụ trong trạng thái SSCĐ cao và chuẩn bị mọi mặt để chuyển lên trạng thái SSCĐ toàn bộ ở đâu?",
+      "options": [
+        "Vị trí thường xuyên",
+        "Khu sơ tán",
+        "Khu tập trung bí mật",
+        "Khu tập kết chiến đấu"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đồng chí cho biết theo Quy định số 430/QyĐ-CT của Phòng Chính trị Sư đoàn, có mấy loại kế hoạch CTĐ, CTCT phải mang theo trong thực hiện nhiệm vụ?",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Hướng dẫn, trước thời gian sinh hoạt chi bộ ít nhất bao nhiêu ngày, chi ủy (bí thư, phó bí thư) phải gửi tài liệu sinh hoạt đến đảng viên?",
+      "options": [
+        "Trong ngày tổ chức sinh hoạt",
+        "12 giờ",
+        "Ít nhất 01 ngày",
+        "03 ngày"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo khung tiêu chí đánh giá chất lượng sinh hoạt chi bộ, tiêu chí “Tổ chức sinh hoạt chi bộ” được chấm tối đa bao nhiêu điểm?",
+      "options": [
+        "25 điểm",
+        "30 điểm",
+        "35 điểm",
+        "40 điểm"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Muốn được tính điểm tối đa ở tiêu chí tỷ lệ đảng viên dự sinh hoạt, tỷ lệ đảng viên tham dự phải đạt:",
+      "options": [
+        "Từ 80% trở lên",
+        "Từ 85% trở lên",
+        "Từ 90% trở lên",
+        "100%"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Hướng dẫn, kết quả đánh giá chất lượng sinh hoạt chi bộ được sử dụng làm cơ sở để đánh giá mức độ hoàn thành nhiệm vụ của đối tượng nào?",
+      "options": [
+        "Chỉ chi bộ.",
+        "Chỉ bí thư chi bộ.",
+        "Chỉ cấp ủy cấp trên trực tiếp.",
+        "Chi bộ, bí thư (phó bí thư) chi bộ và cấp ủy, bí thư cấp ủy cấp trên trực tiếp."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Độ tuổi của người vào Đảng tại thời điểm chi bộ xét kết nạp là bao nhiêu?",
+      "options": [
+        "Từ đủ 18 tuổi đến đủ 55 tuổi.",
+        "Từ đủ 18 tuổi đến đủ 60 tuổi (tính theo tháng)",
+        "Từ đủ 20 tuổi đến đủ 60 tuổi.",
+        "Không giới hạn độ tuổi."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Nguyên tắc tổ chức cơ bản của Đảng là gì?",
+      "options": [
+        "Tập thể lãnh đạo, cá nhân phụ trách.",
+        "Tự phê bình và phê bình.",
+        "Tập trung dân chủ.",
+        "Kỷ luật nghiêm minh, tự giác."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Khi giải quyết công việc, bí thư không được làm điều gì?",
+      "options": [
+        "Lấy danh nghĩa cấp ủy để quyết định những vấn đề thuộc thẩm quyền của tập thể cấp ủy..",
+        "Thống nhất với người chỉ huy.",
+        "Lắng nghe ý kiến của cấp dưới.",
+        "Tham mưu cho ban thường vụ."
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Một chi bộ có đông đảng viên thì bầu chi ủy không quá bao nhiêu thành viên?",
+      "options": [
+        "5 ủy viên.",
+        "7 ủy viên.",
+        "9 ủy viên.",
+        "11 ủy viên."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo quy định hiện hành của Ban Bí thư, thẻ đảng viên được kiểm tra kỹ thuật theo định kỳ mấy năm một lần?",
+      "options": [
+        "3 năm một lần.",
+        "5 năm 2 lần.",
+        "5 năm một lần.",
+        "Mỗi năm 1 lần"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Quy định 144-QĐ/TW xác định chuẩn mực đạo đức cách mạng của cán bộ, đảng viên trong giai đoạn mới gồm mấy điều?",
+      "options": [
+        "3 điều.",
+        "4 điều.",
+        "5 điều.",
+        "19 điều."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Điều lệ Đảng Cộng sản Việt Nam quy định cơ quan lãnh đạo cao nhất của Đảng là cơ quan nào?",
+      "options": [
+        "Ban chấp hành Trung ương.",
+        "Bộ Chính trị",
+        "Ban Bí thư",
+        "Đại hội đại biểu toàn quốc."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Việc thẩm tra lý lịch người vào Đảng trong lực lượng vũ trang được đối chiếu với tài liệu nào?",
+      "options": [
+        "Lý lịch khai khi nhập ngũ hoặc khi được tuyển sinh, tuyển dụng..",
+        "Sổ hộ khẩu gia đình.",
+        "Học bạ trường phổ thông.",
+        "Chỉ căn cứ vào lời khai hiện tại."
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Theo Quy định, thời hạn tối đa của một lần miễn hoặc giảm mức đóng đảng phí là:",
+      "options": [
+        "06 tháng.",
+        "09 tháng.",
+        "12 tháng.",
+        "Không quy định."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định, từ 01/01/2028, mức đóng của đảng viên đã đến tuổi nghỉ hưu tăng thêm bao nhiêu so với giai đoạn trước?",
+      "options": [
+        "0,1%.",
+        "0,2%.",
+        "0,3%.",
+        "0,5%."
+      ],
+      "correct": 0
     }
-    setSyncStatus('ok','Dữ liệu dùng chung');
-  } catch(e) {
-    setSyncStatus('err','Lỗi tải dữ liệu');
-  }
-  render();
-}
-
-async function saveData() {
-  if (_saving) return;
-  _saving = true;
-  setSyncStatus('loading','Đang lưu...');
-  try {
-    await window.storage.set(STORAGE_KEY, JSON.stringify(state), true);
-    setSyncStatus('ok','Đã lưu — dùng chung');
-  } catch(e) {
-    setSyncStatus('err','Lỗi lưu dữ liệu');
-  }
-  _saving = false;
-}
-
-function setSyncStatus(type, msg) {
-  const el = document.getElementById('syncStatus');
-  const txt = document.getElementById('syncTxt');
-  el.className = 'sync-badge';
-  if (type === 'ok') el.style.cssText = 'display:inline-flex;align-items:center;gap:5px;background:rgba(45,158,107,.25);border:1px solid rgba(45,158,107,.4);color:#7fffc0;border-radius:20px;font-size:.68rem;font-weight:600;padding:3px 10px;margin-top:6px';
-  else if (type === 'loading') el.style.cssText = 'display:inline-flex;align-items:center;gap:5px;background:rgba(240,165,0,.25);border:1px solid rgba(240,165,0,.4);color:#ffe082;border-radius:20px;font-size:.68rem;font-weight:600;padding:3px 10px;margin-top:6px';
-  else el.style.cssText = 'display:inline-flex;align-items:center;gap:5px;background:rgba(224,60,60,.25);border:1px solid rgba(224,60,60,.4);color:#ffb3b3;border-radius:20px;font-size:.68rem;font-weight:600;padding:3px 10px;margin-top:6px';
-  txt.textContent = msg;
-}
-
-/* ---- FORMAT ---- */
-function fmt(n){if(isNaN(n)||n==null)return'—';return Number(n).toLocaleString('vi-VN')+' K'}
-function fmtFull(n){if(!n||isNaN(n))return'';return'≈ '+(n*1000).toLocaleString('vi-VN')+' đ'}
-function today(){return new Date().toISOString().slice(0,10)}
-function currentMonth(){const d=new Date();return`Tháng ${d.getMonth()+1} · ${d.getFullYear()}`}
-function escH(s){if(typeof s!=='string')return String(s||'');return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-
-function getWkNum(ds){
-  const d=new Date(ds);if(isNaN(d))return 0;
-  const s=new Date(d.getFullYear(),0,1);
-  return Math.floor((d-s+(s.getTimezoneOffset()-d.getTimezoneOffset())*60000)/(7*24*3600*1000))+1;
-}
-function getWkKey(ds){if(!ds)return'nodate';const d=new Date(ds);if(isNaN(d))return'nodate';return`${d.getFullYear()}-W${String(getWkNum(ds)).padStart(2,'0')}`}
-function getWkLabel(ds){
-  if(!ds)return'Chưa có ngày';const d=new Date(ds);if(isNaN(d))return'Không rõ';
-  const wn=getWkNum(ds);const dy=d.getDay();const dm=(dy===0)?-6:1-dy;
-  const mo=new Date(d);mo.setDate(d.getDate()+dm);const su=new Date(mo);su.setDate(mo.getDate()+6);
-  const f2=dt=>`${String(dt.getDate()).padStart(2,'0')}/${String(dt.getMonth()+1).padStart(2,'0')}`;
-  return`Tuần ${wn}  ·  ${f2(mo)} – ${f2(su)}`;
-}
-
-/* ---- TOAST ---- */
-let _tt;
-function toast(msg,type=''){
-  const el=document.getElementById('toast');
-  el.textContent=msg;el.className='toast show '+type;
-  clearTimeout(_tt);_tt=setTimeout(()=>{el.className='toast'},2800);
-}
-
-/* ---- HINT ---- */
-function hintInit(){const v=parseFloat(document.getElementById('inpInit').value);document.getElementById('hintInit').textContent=v>0?fmtFull(v):''}
-function hintAdd(){const v=parseFloat(document.getElementById('inpAddAmt').value);document.getElementById('hintAdd').textContent=v>0?fmtFull(v):''}
-
-/* ---- PASSWORD MODAL ---- */
-function askPw(desc,cb){
-  _pending=cb;
-  document.getElementById('pwDesc').textContent=desc;
-  document.getElementById('pwInp').value='';
-  document.getElementById('pwErr').classList.remove('show');
-  document.getElementById('pwOv').classList.add('open');
-  setTimeout(()=>document.getElementById('pwInp').focus(),150);
-}
-function confirmPw(){
-  const v=document.getElementById('pwInp').value;
-  if(v===PW){closePw();if(_pending)_pending();_pending=null;}
-  else{document.getElementById('pwErr').classList.add('show');document.getElementById('pwInp').value='';document.getElementById('pwInp').focus();}
-}
-function closePw(){document.getElementById('pwOv').classList.remove('open')}
-document.getElementById('pwOv').addEventListener('click',function(e){if(e.target===this)closePw()});
-
-/* ---- UNLOCK / LOCK ---- */
-const ulDesc={init:'Nhập mật khẩu để mở khoá ô tiền gốc.',add:'Nhập mật khẩu để mở khoá phần thêm tiền.',tbl:'Nhập mật khẩu để chỉnh sửa số tiền đã chi.'};
-function reqUnlock(s){askPw(ulDesc[s]||'Nhập mật khẩu.',()=>doUnlock(s))}
-function doUnlock(s){ul[s]=true;applyLock(s);toast('🔓 Đã mở khoá!','ok')}
-function lockSec(s){ul[s]=false;applyLock(s);toast('🔒 Đã khoá lại.','');
-}
-function applyLock(s){
-  if(s==='init'){
-    const i=document.getElementById('inpInit');
-    const bu=document.getElementById('btnUlInit');const bl=document.getElementById('btnLkInit');
-    if(ul.init){i.classList.remove('locked');i.removeAttribute('readonly');bu.style.display='none';bl.style.display=''}
-    else{i.classList.add('locked');i.setAttribute('readonly','');i.value='';document.getElementById('hintInit').textContent='';bu.style.display='';bl.style.display='none'}
-  }
-  if(s==='add'){
-    const a=document.getElementById('inpAddAmt');const n=document.getElementById('inpAddNote');
-    const bu=document.getElementById('btnUlAdd');const bl=document.getElementById('btnLkAdd');
-    if(ul.add){a.classList.remove('locked');a.removeAttribute('readonly');n.classList.remove('locked');n.removeAttribute('readonly');bu.style.display='none';bl.style.display=''}
-    else{a.classList.add('locked');a.setAttribute('readonly','');n.classList.add('locked');n.setAttribute('readonly','');a.value='';n.value='';document.getElementById('hintAdd').textContent='';bu.style.display='';bl.style.display='none'}
-  }
-  if(s==='tbl'){
-    const bar=document.getElementById('tblUnlockBar');
-    if(ul.tbl){
-      bar.classList.add('open-bar');
-      bar.innerHTML='✅ Ô <strong>số tiền</strong> đã mở khoá. <button class="btn-lk" style="margin-left:auto" onclick="lockSec(\'tbl\')">🔒 Khoá lại</button>';
-    }else{
-      bar.classList.remove('open-bar');
-      bar.innerHTML='🔒 Ô <strong>số tiền</strong> đang khoá. Mở khoá để chỉnh sửa. <button class="btn-ul" style="margin-left:auto" onclick="reqUnlock(\'tbl\')">🔓 Mở khoá</button>';
+  ],
+  "de2": [
+    {
+      "question": "Theo Hướng dẫn số 01-HD/TW, việc xác nhận kết quả thẩm tra lý lịch của người vào Đảng khi gửi theo đường công văn trong nước không được chậm quá bao nhiêu ngày làm việc kể từ khi nhận được công văn đề nghị thẩm tra?",
+      "options": [
+        "15 ngày làm việc",
+        "20 ngày làm việc",
+        "30 ngày làm việc",
+        "45 ngày làm việc"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Người xin vào Đảng đã được cấp Giấy chứng nhận học lớp bồi dưỡng nhận thức về Đảng, nhưng quá thời hạn nào mà chi bộ chưa xem xét đề nghị kết nạp thì phải học lại để được cấp giấy chứng nhận mới?",
+      "options": [
+        "24 tháng",
+        "36 tháng",
+        "48 tháng",
+        "60 tháng"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Theo Hướng dẫn số 01-HD/TW, sau khi lập hồ sơ đề nghị xét kết nạp người vào Đảng, nếu quá bao nhiêu tháng chi bộ chưa xem xét đề nghị kết nạp thì phải làm lại một số tài liệu trong hồ sơ?",
+      "options": [
+        "06 tháng",
+        "12 tháng",
+        "18 tháng",
+        "24 tháng"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Hướng dẫn số 01-HD/TW, Ban Tổ chức Trung ương hướng dẫn kiểm tra tình hình quản lý, sử dụng thẻ đảng viên trong toàn Đảng theo định kỳ:",
+      "options": [
+        "02 năm một lần.",
+        "03 năm một lần.",
+        "04 năm một lần.",
+        "05 năm một lần."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Hình thức khen thưởng đối với đảng viên?",
+      "options": [
+        "Tặng giấy khen, bằng khen, Huy hiệu Đảng; tặng huân chương, huy chương và các danh hiệu vinh dự khác của Đảng và Nhà nước.",
+        "Tặng giấy khen, bằng khen, Huy hiệu Đảng; tặng huân chương, huy chương.",
+        "Biểu dương, tặng giấy khen, bằng khen, Huy hiệu Đảng và các danh hiệu vinh dự khác của Đảng và Nhà nước.",
+        "Biểu dương, tặng giấy khen, bằng khen, Huy hiệu Đảng; tặng huân chương, huy chương và các danh hiệu vinh dự khác của Đảng và Nhà nước."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Đối với người đang học tập tập trung tại cơ sở đào tạo hoặc đang công tác biệt phái, tổ chức đảng nơi học tập hoặc nơi biệt phái xem xét kết nạp khi thời gian học tập, công tác biệt phái từ:",
+      "options": [
+        "06 tháng trở lên.",
+        "09 tháng trở lên.",
+        "12 tháng trở lên.",
+        "18 tháng trở lên."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Hướng dẫn số 01-HD/TW, đối với người trên 60 tuổi muốn được xem xét kết nạp Đảng, ngoài các điều kiện khác còn phải được:",
+      "options": [
+        "Ban Tổ chức Trung ương đồng ý bằng văn bản.",
+        "Thường trực cấp ủy cấp tỉnh đồng ý bằng văn bản.",
+        "Ban Chấp hành đảng bộ cấp trên trực tiếp đồng ý.",
+        "Ban Thường vụ cấp ủy trực thuộc Trung ương đồng ý bằng văn bản trước khi cấp có thẩm quyền quyết định kết nạp."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Chương trình buổi lễ kết nạp đảng viên thực hiện mấy nội dung?",
+      "options": [
+        "6 nội dung",
+        "7 nội dung",
+        "8 nội dung",
+        "9 nội dung"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Số lượng cấp uỷ viên của đảng uỷ bộ phận là bao nhiêu đồng chí?",
+      "options": [
+        "Không quá 9 đồng chí",
+        "Không quá 5 đồng chí",
+        "Không quá 7 đồng chí",
+        "Không quá 11 đồng chí"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Phương châm thi hành kỷ luật của Đảng là gì?",
+      "options": [
+        "Nghiêm minh, chính xác, kịp thời",
+        "Tự giác, nghiêm minh",
+        "Công minh, chính xác, kịp thời",
+        "Nghiêm minh, tự giác, kịp thời"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Quy định số 21 của Ban Chấp hành Trung ương Quy định về công tác Kiểm tra, giám sát và kỷ luật Đảng, các hình thức kỷ luật đối với tổ chức đảng gồm?",
+      "options": [
+        "Khiển trách, cảnh cáo, xóa tên",
+        "Khiển trách, cảnh cáo, giải tán",
+        "Khiển trách, cảnh cáo, giải thể",
+        "Khiển trách, cảnh cáo"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Quy định số 21 của Ban Chấp hành Trung ương Quy định về công tác Kiểm tra, giám sát và kỷ luật Đảng, các hình thức kỷ luật đối với đảng viên chính thức gồm?",
+      "options": [
+        "Khiển trách, cảnh cáo, cách chức, khai trừ",
+        "Khiển trách, cảnh cáo, cách chức, xoá tên",
+        "Khiển trách, cảnh cáo, xoá tên",
+        "Khiển trách, cảnh cáo, cách chức"
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Quy định số số 21 của Ban Chấp hành Trung ương Quy định về công tác Kiểm tra, giám sát và kỷ luật Đảng, các hình thức kỷ luật đối với đảng viên dự bị gồm?",
+      "options": [
+        "Khiển trách, cảnh cáo, cách chức, khai trừ",
+        "Khiển trách, cảnh cáo, xoá tên",
+        "Khiển trách, cảnh cáo",
+        "Khiển trách, cảnh cáo, cách chức"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Chi bộ có thẩm quyền ra quyết định kỷ luật đảng viên tới hình thức nào?",
+      "options": [
+        "Khiển trách",
+        "Cảnh cáo",
+        "Khiển trách, cảnh cáo (xóa tên trong danh sách đảng viên đối với đảng viên dự bị)",
+        "Khiển trách, cảnh cáo"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Tổ chức đảng bị kỷ luật khiển trách, cảnh cáo do cấp nào quyết định?",
+      "options": [
+        "Cấp ủy cấp trên trực tiếp quyết định.",
+        "Cấp ủy trực thuộc Quân uỷ trung ương quyết định.",
+        "Cấp ủy hoặc ban thường vụ cấp ủy cấp trên trực tiếp quyết định",
+        "Ban Chấp hành Trung ương quyết định"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đảng viên vi phạm một trong các trường hợp nào sau đây thì cấp uỷ và uỷ ban kiểm tra có thẩm quyền trực tiếp xem xét, quyết định kỷ luật, không cần yêu cầu đảng viên đó phải kiểm điểm trước chi bộ?",
+      "options": [
+        "Vi phạm khi thực hiện nhiệm vụ cấp trên giao; nội dung vi phạm liên quan đến bí mật của Đảng và Nhà nước mà chi bộ không biết; vi phạm trước khi chuyển đến sinh hoạt ở chi bộ; vi phạm pháp luật đang bị khởi tố, tạm giam, truy nã, truy tố, xét xử.",
+        "Suy thoái về đạo đức, lối sống; vi phạm kỷ luật nghiêm trọng.",
+        "Vi phạm kỷ luật không gây hậu quả nghiêm trọng.",
+        "Cả 3 đáp án trên đều đúng."
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Đảng viên sinh hoạt đảng tạm thời, nếu vi phạm kỷ luật thì cấp uỷ nơi đảng viên sinh hoạt tạm thời có trách nhiệm xem xét, xử lý kỷ luật tới mức nào?",
+      "options": [
+        "Khiển trách",
+        "Cảnh cáo",
+        "Cách chức",
+        "Khai trừ"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Hướng dẫn số 01-HD/TW, khi người xin vào Đảng chuyển đơn vị công tác sau khi hồ sơ đã gửi lên cấp có thẩm quyền nhưng chưa có quyết định kết nạp, cấp ủy nơi chuyển đến phải ban hành quyết định kết nạp trong thời hạn bao nhiêu ngày làm việc kể từ khi nhận được công văn và hồ sơ?",
+      "options": [
+        "15 ngày.",
+        "20 ngày.",
+        "30 ngày.",
+        "45 ngày."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Hướng dẫn số 01-HD/TW, đối với người vào Đảng là ngư dân thường xuyên làm việc ngoài biển, nếu không đủ trình độ học vấn theo quy định thì yêu cầu tối thiểu là:",
+      "options": [
+        "Biết đọc, biết viết.",
+        "Hoàn thành lớp 3.",
+        "Hoàn thành chương trình giáo dục bậc tiểu học.",
+        "Hoàn thành trung học cơ sở."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Quy định số 21-QĐ/TW của Ban Chấp hành Trung ương “Quy định về công tác Kiểm tra, giám sát và kỷ luật Đảng” ban hành ngày, tháng, năm nào?",
+      "options": [
+        "Ngày 08/4/2026",
+        "Ngày 11/4/2026",
+        "Ngày 28/7/2021",
+        "Ngày 29/7/2021"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Hướng dẫn số 01-HD/TW, khi nghiên cứu hồ sơ đảng viên tại phòng hồ sơ, người nghiên cứu được phép thực hiện hành vi nào dưới đây?",
+      "options": [
+        "Ghi chú vào hồ sơ để tiện theo dõi.",
+        "Chụp ảnh toàn bộ hồ sơ.",
+        "Bổ sung tài liệu còn thiếu.",
+        "Không được tự ý xóa, sửa chữa, ghi thêm, đưa thêm hoặc làm thất lạc tài liệu trong hồ sơ."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Theo Quy định số 01-QĐ/TW, Quy định này có hiệu lực thi hành từ thời điểm nào?",
+      "options": [
+        "Ngày 03/02/2026.",
+        "Ngày 06/02/2026.",
+        "Ngày 01/02/2026.",
+        "Ngày 01/01/2026."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đảng viên chưa đến tuổi nghỉ hưu trong điều kiện lao động bình thường đóng đảng phí bằng bao nhiêu phần trăm mức lương tối thiểu tháng theo vùng trong thời gian từ 01/01/2026 đến hết 31/12/2027?",
+      "options": [
+        "0,2%.",
+        "0,3%.",
+        "0,5%.",
+        "1%."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Kết luận số 01-KL/TW ngày 18/5/2021 của Bộ Chính trị nói về vấn đề gì?",
+      "options": [
+        "Về tiếp tục học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh trong giai đoạn mới.",
+        "Về xây dựng Đảng và hệ thống chính trị, ngăn chặn “tự diễn biến”, “tự chuyển hóa” trong nội bộ.",
+        "Về tiếp tục thực hiện Chỉ thị số 05-CT/TW của Bộ Chính trị “Về đẩy mạnh học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh”.",
+        "Về thi hành điều lệ Đảng."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Kể từ ngày 01/01/2028, đảng viên đã đến tuổi nghỉ hưu trong điều kiện lao động bình thường đóng đảng phí bằng:",
+      "options": [
+        "0,2% mức lương tối thiểu tháng theo vùng.",
+        "0,3% mức lương tối thiểu tháng theo vùng.",
+        "0,5% mức lương tối thiểu tháng theo vùng.",
+        "0,4% mức lương tối thiểu tháng theo vùng."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đảng viên có hoàn cảnh khó khăn (ngoài các trường hợp được miễn theo khoản 1 Điều 5), nếu được xem xét giảm đảng phí thì không có mức giảm nào sau đây?",
+      "options": [
+        "30%.",
+        "50%.",
+        "70%.",
+        "80%."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Mỗi lần xem xét miễn hoặc giảm mức đóng đảng phí theo khoản 2 Điều 5 được thực hiện trong thời gian tối đa là:",
+      "options": [
+        "03 tháng.",
+        "06 tháng.",
+        "12 tháng.",
+        "24 tháng."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định số 01-QĐ/TW, chi bộ nào dưới đây được để lại 70% số đảng phí thu được?",
+      "options": [
+        "Chi bộ cơ quan cấp tỉnh.",
+        "Chi bộ doanh nghiệp nhà nước.",
+        "Chi bộ bệnh viện tuyến trung ương.",
+        "Chi bộ đại đội."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn số 5119/HD-CT, ngày 25/12/2025 của TCCT về một số vấn đề về tiếp tục đổi mới và nâng cao chất lượng sinh hoạt chi bộ trong Đảng bộ Quân đội trong giai đoạn mới, có mấy tiêu chí đánh giá chất lượng sinh hoạt?",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Theo Quy định, trường hợp đảng viên được xem xét giảm mức đóng đảng phí thì thời hạn giảm tối đa của một lần quyết định là:",
+      "options": [
+        "03 tháng.",
+        "06 tháng.",
+        "12 tháng.",
+        "24 tháng."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Điều 2 Quy định số 01-QĐ/TW, hình thức đóng đảng phí nào dưới đây được khuyến khích áp dụng?",
+      "options": [
+        "Chỉ bằng tiền mặt.",
+        "Chỉ chuyển khoản ngân hàng.",
+        "Đóng qua Cổng Dịch vụ công Quốc gia.",
+        "Qua ví điện tử."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đảng ủy ở sư đoàn, vùng hải quân, vùng cảnh sát biển, cấp cục có đơn vị trực thuộc đủ điều kiện lập đảng bộ cơ sở; học viện, trường sĩ quan, trường đại học… có số lượng bao nhiêu ủy viên?",
+      "options": [
+        "Từ 7 đến 11 ủy viên.",
+        "Từ 9 đến 13 ủy viên.",
+        "Từ 9 đến 15 ủy viên.",
+        "Từ 11 đến 15 ủy viên."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, đảng ủy cơ sở có từ bao nhiêu ủy viên trở lên thì bầu ban thường vụ?",
+      "options": [
+        "5 ủy viên.",
+        "7 ủy viên.",
+        "9 ủy viên.",
+        "11 ủy viên."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết quy trình ra nghị quyết có mấy bước?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, chi bộ có đông đảng viên được bầu chi ủy không quá bao nhiêu ủy viên?",
+      "options": [
+        "5 ủy viên.",
+        "7 ủy viên.",
+        "9 ủy viên.",
+        "11 ủy viên."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, việc thành lập, sáp nhập, chia tách, giải thể tổ chức đảng trong Quân đội phải căn cứ chủ yếu vào yếu tố nào?",
+      "options": [
+        "Nhu cầu của đơn vị.",
+        "Đề nghị của cấp ủy cấp dưới.",
+        "Tổ chức biên chế và nhiệm vụ của đơn vị.",
+        "Số lượng đảng viên của đơn vị."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, cấp ủy có thẩm quyền quyết định thành lập tổ chức đảng phải bảo đảm nguyên tắc nào?",
+      "options": [
+        "Phù hợp với nguyện vọng của cán bộ, đảng viên.",
+        "Phù hợp với yêu cầu quản lý quân số.",
+        "Đúng Điều lệ Đảng, quy định của Trung ương và tổ chức biên chế.",
+        "Theo đề nghị của người chỉ huy đơn vị."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Mức phân loại nào dưới đây không phải là mức đánh giá, phân loại chi bộ hằng năm?",
+      "options": [
+        "Hoàn thành tốt nhiệm vụ",
+        "Hoàn thành nhiệm vụ",
+        "Không hoàn thành nhiệm vụ",
+        "Trong sạch vững mạnh"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Hướng dẫn 1031/HD-CT ngày 20/6/2016 quy định nghị quyết lãnh đạo toàn diện năm cấp chi bộ không quá bao nhiêu trang?",
+      "options": [
+        "Không quá 3 trang khổ giấy A4.",
+        "Không quá 5 trang khổ giấy A4.",
+        "Không quá 6 trang khổ giấy A4.",
+        "Không quá 7 trang khổ giấy A4."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, đảng ủy cơ sở có 08 cấp ủy viên thì:",
+      "options": [
+        "Được bầu ban thường vụ.",
+        "Không bầu ban thường vụ.",
+        "Được bầu không quá 03 ủy viên ban thường vụ.",
+        "Do cấp trên quyết định."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Kết luận số 21-KL/TW, mục tiêu của công tác xây dựng, chỉnh đốn Đảng nhằm trực tiếp nâng cao năng lực nào của Đảng?",
+      "options": [
+        "Năng lực lãnh đạo, sức chiến đấu của tổ chức cơ sở đảng.",
+        "Năng lực lãnh đạo, năng lực cầm quyền, sức chiến đấu của Đảng.",
+        "Năng lực quản lý nhà nước và sức chiến đấu của Đảng.",
+        "Năng lực lãnh đạo và hiệu lực quản lý của chính quyền."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Kết luận số 21-KL/TW, các cấp ủy, tổ chức đảng phải tập trung lãnh đạo, chỉ đạo thực hiện đồng bộ:",
+      "options": [
+        "Các nghị quyết và chương trình hành động.",
+        "Các nhiệm vụ trước mắt.",
+        "Các mục tiêu, nhiệm vụ, giải pháp chủ yếu.",
+        "Các chương trình kiểm tra, giám sát."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn số 5119/HD-CT, ngày 25/12/2025 của Tổng cục Chính trị, quy định thời gian một buổi sinh hoạt thường kỳ hằng tháng đối với cấp chi bộ là bao nhiêu phút?",
+      "options": [
+        "Tối thiểu 90 phút đối với chi bộ có chi ủy, tối thiểu 60 phút đối với chi bộ không có chi uỷ.",
+        "Tối thiểu 120 phút đối với chi bộ có chi ủy, tối thiểu 90 phút đối với chi bộ không có chi ủy.",
+        "Không quá 60 phút đối với chi bộ không có chi ủy, không quá 90 phút đối với chi bộ có chi ủy.",
+        "Không quá 120 phút đối với chi bộ có chi ủy, không quá 90 phút đối với chi bộ không có chi ủy."
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Trong tháng tổ chức sinh hoạt chuyên đề và sinh hoạt thường kỳ cùng một buổi thì thời gian tối thiểu là:",
+      "options": [
+        "90 phút",
+        "100 phút",
+        "110 phút",
+        "120 phút"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Đồng chí cho biết Chỉ thị số 732-CT/ĐU của Thường vụ Đảng ủy Quân khu về xây dựng “Chi bộ bốn tốt”,“Đảng bộ cơ sở bốn tốt” ban hành ngày, tháng, năm nào?",
+      "options": [
+        "Ngày 10/12/2022",
+        "Ngày 11/12/2022",
+        "Ngày 12/12/2022",
+        "Ngày 13/12/2022"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết Chỉ thị số 366-CT/ĐU của Thường vụ Đảng ủy Sư đoàn về xây dựng “Chi bộ bốn tốt”,“Đảng bộ cơ sở bốn tốt” ban hành ngày, tháng, năm nào?",
+      "options": [
+        "Ngày 02/01/2023",
+        "Ngày 03/01/2023",
+        "Ngày 04/01/2023",
+        "Ngày 05/01/2023"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Thời gian dành để thông báo thời sự, quán triệt nghị quyết của cấp trên trong một buổi sinh hoạt chi bộ không được quá:",
+      "options": [
+        "15 phút",
+        "20 phút",
+        "30 phút",
+        "45 phút"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết nội dung “Chi bộ bốn tốt”, “Đảng bộ cơ sở bốn tốt” theo Chỉ thị 732 của Thường vụ Đảng ủy Quân khu về xây dựng chi bộ bốn tốt”, “đảng bộ cơ sở bốn tốt”?",
+      "options": [
+        "Hoàn thành tốt nhiệm vụ được giao; chất lượng sinh hoạt tốt; đoàn kết, kỷ luật tốt; cán bộ, đảng viên tốt.",
+        "Hoàn thành tốt nhiệm vụ chính trị; chất lượng sinh hoạt tốt; chấp hành kỷ luật tốt; cán bộ, đảng viên tốt.",
+        "Hoàn thành tốt nhiệm vụ chính trị; chất lượng sinh hoạt tốt; đoàn kết, kỷ luật tốt; cán bộ, đảng viên tốt.",
+        "Hoàn thành tốt nhiệm vụ chính trị; chất lượng sinh hoạt tốt; đoàn kết tốt, kỷ luật nghiêm; cán bộ, đảng viên tốt."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biêt theo Hướng dẫn 2292/HD-CT ngày 21/12/2017 của TCCT về Hướng dẫn CTĐ, CTCT rtrong chuyển TTSSCĐ của QĐND và DQTV quy định thời gian họp cấp ủy, chi bộ ở trạng thái SSCĐ cao là bao nhiêu?",
+      "options": [
+        "Không quá 60 phút",
+        "Không quá 45 phút",
+        "Không quá 30 phút",
+        "Không quá 20 phút"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Hướng dẫn, trước thời gian sinh hoạt chi bộ ít nhất bao nhiêu ngày, chi ủy (bí thư, phó bí thư) phải gửi tài liệu sinh hoạt đến đảng viên?",
+      "options": [
+        "Trong ngày tổ chức sinh hoạt",
+        "12 giờ",
+        "Ít nhất 01 ngày",
+        "03 ngày"
+      ],
+      "correct": 2
     }
-    document.querySelectorAll('td input[data-f="amount"]').forEach(inp=>{
-      if(ul.tbl){inp.classList.remove('cl');inp.removeAttribute('readonly')}
-      else{inp.classList.add('cl');inp.setAttribute('readonly','')}
+  ],
+  "de3": [
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn 144/HD-CT của Phòng Chính trị Sư đoàn về CTĐ, CTCT trong chuyển TTSSCĐ cấp Trung đoàn, Tiểu đoàn, Đại đội, tổ chức họp cấp uỷ, chi bộ ra nghị quyết lãnh đạo đơn vị thực hiện nhiệm vụ trong trạng thái SSCĐ cao và chuẩn bị mọi mặt để chuyển lên trạng thái SSCĐ toàn bộ ở đâu?",
+      "options": [
+        "Vị trí thường xuyên",
+        "Khu sơ tán",
+        "Khu tập trung bí mật",
+        "Khu tập kết chiến đấu"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đồng chí cho biết theo Quy định số 430/QyĐ-CT của Phòng Chính trị Sư đoàn, có mấy loại kế hoạch CTĐ, CTCT phải mang theo trong thực hiện nhiệm vụ?",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo quy định của Điều lệ Đảng cộng sản Việt Nam, đảng viên dự bị không có quyền nào sau đây?",
+      "options": [
+        "Được thông tin và thảo luận các vấn đề về Cương lĩnh chính trị, Điều lệ Đảng, đường lối, chủ trương, chính sách của Đảng; biểu quyết công việc của Đảng.",
+        "Biểu quyết, ứng cử và bầu cử cơ quan lãnh đạo các cấp của Đảng theo quy định của Ban Chấp hành Trung ương.",
+        "Phê bình và tự phê bình ở mọi cấp trong phạm vi tổ chức; báo cáo, kiến nghị với các cơ quan có trách nhiệm và yêu cầu được trả lời",
+        "Trình bày ý kiến khi tổ chức đảng nhận xét, quyết định công tác hoặc thi hành kỷ luật đối với mình."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo khung tiêu chí đánh giá chất lượng sinh hoạt chi bộ, tiêu chí “Tổ chức sinh hoạt chi bộ” được chấm tối đa bao nhiêu điểm?",
+      "options": [
+        "25 điểm",
+        "30 điểm",
+        "35 điểm",
+        "40 điểm"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Điều lệ Đảng cộng sản Việt Nam quy định tiến hành xử lý tổ chức đảng và đảng viên vi phạm kỷ luật như thế nào?",
+      "options": [
+        "Tổ chức đảng và đảng viên vi phạm kỷ luật phải xử lý nghiêm túc, chính xác, kịp thời.",
+        "Tổ chức đảng và đảng viên vi phạm kỷ luật phải xử lý công minh, chính xác, kịp thời.",
+        "Tổ chức đảng và đảng viên vi phạm kỷ luật phải xử lý công bằng, chính xác, kịp thời.",
+        "Tổ chức đảng và đảng viên vi phạm kỷ luật phải xử lý kiên quyết, công bằng, chính xác, nhanh chóng."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Muốn được tính điểm tối đa ở tiêu chí tỷ lệ đảng viên dự sinh hoạt, tỷ lệ đảng viên tham dự phải đạt:",
+      "options": [
+        "Từ 80% trở lên",
+        "Từ 85% trở lên",
+        "Từ 90% trở lên",
+        "100%"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Hướng dẫn, một đảng viên vắng mặt có lý do quá bao nhiêu lần liên tiếp trong năm thì chi bộ không được tính điểm tối đa về tỷ lệ dự sinh hoạt?",
+      "options": [
+        "02 lần",
+        "03 lần",
+        "04 lần",
+        "05 lần"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo quy định hiện hành của Ban Bí thư, thẻ đảng viên được kiểm tra kỹ thuật theo định kỳ mấy năm một lần?",
+      "options": [
+        "3 năm một lần.",
+        "5 năm 2 lần.",
+        "5 năm một lần.",
+        "1 năm 1 lần"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Sau sinh hoạt chi bộ, chậm nhất bao lâu chi ủy phải hoàn thiện, ban hành nghị quyết và báo cáo cấp trên?",
+      "options": [
+        "Trong ngày",
+        "01-02 ngày",
+        "03 ngày",
+        "05 ngày"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Hướng dẫn một số nghiệp vụ về công tác tổ chức quản lý đảng viên trong Đảng bộ Quân đội do Tổng Cục Chính trị xuất bản năm 2016, đồng chí cho biết giấy giới thiệu sinh hoạt đảng nội bộ là loại nào?",
+      "options": [
+        "Loại 3 ô",
+        "Loại 5 ô.",
+        "Loại 7 ô.",
+        "Loại 8 ô"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Thời gian dành để thông báo thời sự, quán triệt nghị quyết của cấp trên trong một buổi sinh hoạt chi bộ không được quá:",
+      "options": [
+        "15 phút",
+        "20 phút",
+        "30 phút",
+        "45 phút"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Những loại hình sinh hoạt chủ yếu của chi bộ là gì?",
+      "options": [
+        "Sinh hoạt chính trị, sinh hoạt chuyên đề, sinh hoạt tư tưởng",
+        "Sinh hoạt chính trị; sinh hoạt học tập, sinh hoạt tư tưởng",
+        "Sinh hoạt chính trị, sinh hoạt tự phê bình và phê bình; sinh hoạt học tập",
+        "Sinh hoạt chính trị, sinh hoạt chuyên đề; sinh hoạt học tập"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Điều lệ Đảng Cộng sản Việt Nam quy định cơ quan lãnh đạo cao nhất của Đảng là cơ quan nào?",
+      "options": [
+        "Ban chấp hành Trung ương.",
+        "Bộ Chính trị",
+        "Ban Bí thư",
+        "Đại hội đại biểu toàn quốc."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Quy định số 21-QĐ/TW của Ban Chấp hành Trung ương “Quy định về công tác Kiểm tra, giám sát và kỷ luật Đảng” ban hành ngày, tháng, năm nào?",
+      "options": [
+        "Ngày 26/7/2021",
+        "Ngày 11/4/2026",
+        "Ngày 28/7/2021",
+        "Ngày 08/4/2026"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Quy định số 69-QĐ/TW của Bộ Chính trị về kỷ luật tổ chức đảng, đảng viên vi phạm ban hành ngày, tháng, năm nào?",
+      "options": [
+        "Ngày 05/7/2022",
+        "Ngày 06/7/2022",
+        "Ngày 07/7/2022",
+        "Ngày 08/7/2022"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đầu năm hoặc đầu quý, chi bộ phải xây dựng kế hoạch gì để báo cáo cấp ủy cấp trên trực tiếp theo dõi, chỉ đạo?",
+      "options": [
+        "Kế hoạch kiểm tra, giám sát",
+        "Kế hoạch phát triển đảng viên",
+        "Kế hoạch sinh hoạt chuyên đề",
+        "Kế hoạch giáo dục chính trị"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Hướng dẫn, sinh hoạt chi bộ thường kỳ hằng tháng được gắn với sinh hoạt ngày Đảng, ngày chính trị và văn hóa tinh thần vào thời điểm nào?",
+      "options": [
+        "Thứ Hai tuần đầu tháng",
+        "Thứ Tư tuần đầu tháng",
+        "Thứ Năm tuần đầu tháng",
+        "Thứ Sáu tuần cuối tháng"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Kết luận số 01-KL/TW ngày 18/5/2021 của Bộ Chính trị nói về vấn đề gì?",
+      "options": [
+        "Về tiếp tục học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh trong giai đoạn mới.",
+        "Về xây dựng Đảng và hệ thống chính trị, ngăn chặn “tự diễn biến”, “tự chuyển hóa” trong nội bộ.",
+        "Về tiếp tục thực hiện Chỉ thị số 05-CT/TW của Bộ Chính trị “Về đẩy mạnh học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh”.",
+        "Về thi hành điều lệ Đảng."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Tổ chức đảng bị kỷ luật khiển trách, cảnh cáo do cấp nào quyết định?",
+      "options": [
+        "Cấp ủy cấp trên trực tiếp quyết định.",
+        "Cấp ủy trực thuộc Quân uỷ trung ương quyết định.",
+        "Cấp ủy hoặc ban thường vụ cấp ủy cấp trên trực tiếp quyết định",
+        "Ban Chấp hành Trung ương quyết định"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đảng viên vi phạm một trong các trường hợp nào sau đây thì cấp uỷ và uỷ ban kiểm tra có thẩm quyền trực tiếp xem xét, quyết định kỷ luật, không cần yêu cầu đảng viên đó phải kiểm điểm trước chi bộ?",
+      "options": [
+        "Vi phạm khi thực hiện nhiệm vụ cấp trên giao; nội dung vi phạm liên quan đến bí mật của Đảng và Nhà nước mà chi bộ không biết; vi phạm trước khi chuyển đến sinh hoạt ở chi bộ; vi phạm pháp luật đang bị khởi tố, tạm giam, truy nã, truy tố, xét xử.",
+        "Suy thoái về đạo đức, lối sống; vi phạm kỷ luật nghiêm trọng.",
+        "Vi phạm kỷ luật không gây hậu quả nghiêm trọng.",
+        "Cả 3 đáp án trên đều đúng."
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Đảng viên sinh hoạt đảng tạm thời, nếu vi phạm kỷ luật thì cấp uỷ nơi đảng viên sinh hoạt tạm thời có trách nhiệm xem xét, xử lý kỷ luật tới mức nào?",
+      "options": [
+        "Khiển trách",
+        "Cảnh cáo",
+        "Cách chức",
+        "Khai trừ"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Kết luận số 21-KL/TW yêu cầu kiên quyết đấu tranh chống nội dung nào dưới đây?",
+      "options": [
+        "Chủ nghĩa cơ hội.",
+        "Chủ nghĩa cá nhân.",
+        "Chủ nghĩa bảo thủ.",
+        "Chủ nghĩa hình thức."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, nội dung nào sau đây là đúng?",
+      "options": [
+        "Mọi đảng ủy cơ sở đều có ban thường vụ.",
+        "Mọi chi bộ đều có chi ủy.",
+        "Đảng ủy bộ phận đều có ban thường vụ.",
+        "Chỉ đảng ủy cơ sở có từ 09 cấp ủy viên trở lên mới bầu ban thường vụ."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn số 1031/HD-CT của TCCT về một số vấn đề về nghị quyết và chế độ ra nghị quyết lãnh đạo của các cấp uỷ, chi bộ trong Đảng bộ Quân đội có mấy loại Nghị quyết cơ bản?",
+      "options": [
+        "Có 2 loại nghị quyết cơ bản",
+        "Có 3 loại nghị quyết cơ bản",
+        "Có 4 loại nghị quyết cơ bản",
+        "Có 5 loại nghị quyết cơ bản"
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, khi đơn vị được điều chỉnh tổ chức biên chế nhưng chưa có quyết định của cấp có thẩm quyền về tổ chức đảng, tổ chức đảng:",
+      "options": [
+        "Đương nhiên chấm dứt hoạt động.",
+        "Vẫn hoạt động theo tổ chức cũ cho đến khi có quyết định mới.",
+        "Phải tổ chức đại hội bất thường.",
+        "Tự bầu cấp ủy mới."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, khi tổ chức lại đơn vị thì tổ chức đảng:",
+      "options": [
+        "Giữ nguyên, không thay đổi.",
+        "Tự động giải thể.",
+        "Được điều chỉnh, thành lập hoặc giải thể tương ứng theo quyết định của cấp có thẩm quyền.",
+        "Chờ đại hội nhiệm kỳ mới."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, tổ chức đảng trong Quân đội được tổ chức theo nguyên tắc nào?",
+      "options": [
+        "Độc lập với hệ thống chỉ huy quân sự.",
+        "Phù hợp với tổ chức biên chế, bảo đảm sự lãnh đạo tuyệt đối, trực tiếp về mọi mặt của Đảng đối với Quân đội.",
+        "Theo địa bàn đóng quân.",
+        "Theo quân số của từng đơn vị."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đồng chí cho biết quy trình ra nghị quyết có mấy bước?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, chi bộ có đông đảng viên được bầu chi ủy không quá bao nhiêu ủy viên?",
+      "options": [
+        "5 ủy viên.",
+        "7 ủy viên.",
+        "9 ủy viên.",
+        "11 ủy viên."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, đảng ủy cơ sở có từ bao nhiêu ủy viên trở lên thì bầu ban thường vụ?",
+      "options": [
+        "5 ủy viên.",
+        "7 ủy viên.",
+        "9 ủy viên.",
+        "11 ủy viên."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đảng ủy ở sư đoàn, vùng hải quân, vùng cảnh sát biển, cấp cục có đơn vị trực thuộc đủ điều kiện lập đảng bộ cơ sở; học viện, trường sĩ quan, trường đại học… có số lượng bao nhiêu ủy viên?",
+      "options": [
+        "Từ 7 đến 11 ủy viên.",
+        "Từ 9 đến 13 ủy viên.",
+        "Từ 9 đến 15 ủy viên.",
+        "Từ 11 đến 15 ủy viên."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn số 5119/HD-CT của TCCT về một số vấn đề về tiếp tục nâng cao chất lượng sinh hoạt chi bộ trong Đảng bộ Quân đội trong giai đoạn mới, có mấy tiêu chí đánh giá chất lượng sinh hoạt?",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, Ban Thường vụ Quân ủy Trung ương có số lượng bao nhiêu đồng chí?",
+      "options": [
+        "Từ 5 đến 7 đồng chí.",
+        "Từ 7 đến 9 đồng chí.",
+        "Từ 9 đến 11 đồng chí.",
+        "Từ 11 đến 13 đồng chí."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định, thời hạn tối đa của một lần miễn hoặc giảm mức đóng đảng phí là:",
+      "options": [
+        "06 tháng.",
+        "09 tháng.",
+        "12 tháng.",
+        "Không quy định."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Mức phân loại nào dưới đây không phải là mức đánh giá, phân loại chi bộ hằng năm?",
+      "options": [
+        "Hoàn thành tốt nhiệm vụ",
+        "Hoàn thành nhiệm vụ",
+        "Không hoàn thành nhiệm vụ",
+        "Trong sạch vững mạnh"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Hướng dẫn 1031/HD-CT ngày 20/6/2016 quy định nghị quyết lãnh đạo toàn diện năm cấp chi bộ không quá bao nhiêu trang?",
+      "options": [
+        "Không quá 3 trang khổ giấy A4.",
+        "Không quá 5 trang khổ giấy A4.",
+        "Không quá 6 trang khổ giấy A4.",
+        "Không quá 7 trang khổ giấy A4."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định, từ 01/01/2028, mức đóng của đảng viên đã đến tuổi nghỉ hưu tăng thêm bao nhiêu so với giai đoạn trước?",
+      "options": [
+        "0,1%.",
+        "0,2%.",
+        "0,3%.",
+        "0,5%."
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Theo Quy định, từ 01/01/2028, mức đóng của đảng viên chưa đến tuổi nghỉ hưu so với giai đoạn 2026-2027 tăng thêm bao nhiêu?",
+      "options": [
+        "0,1%.",
+        "0,2%.",
+        "0,3%.",
+        "0,5%."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định số 01-QĐ/TW, việc đóng đảng phí bằng hình thức nào sau đây được xác định là hình thức khuyến khích, nhưng không bắt buộc?",
+      "options": [
+        "Chuyển khoản ngân hàng.",
+        "Ví điện tử.",
+        "Qua Cổng Dịch vụ công Quốc gia.",
+        "Qua tài khoản của chi bộ."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định, đối tượng nào dưới đây được giảm còn 50% mức đóng đảng phí theo quy định, không phải do hoàn cảnh khó khăn được cấp có thẩm quyền xem xét?",
+      "options": [
+        "Đảng viên bị thiệt hại do thiên tai.",
+        "Đảng viên mắc bệnh hiểm nghèo.",
+        "Đảng viên là người có công với cách mạng, hưởng trợ cấp bệnh binh, trợ cấp mất sức lao động hoặc trợ cấp bảo trợ xã hội hằng tháng.",
+        "Đảng viên có thu nhập thấp."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định, trong thời gian từ 01/01/2026 đến hết 31/12/2027, mức đóng đảng phí của đảng viên đã đến tuổi nghỉ hưu trong điều kiện lao động bình thường bằng:",
+      "options": [
+        "0,1% mức lương tối thiểu tháng theo vùng.",
+        "0,2% mức lương tối thiểu tháng theo vùng.",
+        "0,3% mức lương tối thiểu tháng theo vùng.",
+        "0,5% mức lương tối thiểu tháng theo vùng."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đồng chí cho biết Chỉ thị số 732-CT/ĐU của Thường vụ Đảng ủy Quân khu về xây dựng “Chi bộ bốn tốt”,“Đảng bộ cơ sở bốn tốt” ban hành ngày, tháng, năm nào?",
+      "options": [
+        "Ngày 10/12/2022",
+        "Ngày 11/12/2022",
+        "Ngày 12/12/2022",
+        "Ngày 13/12/2022"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết Chỉ thị số 366-CT/ĐU của Thường vụ Đảng ủy Sư đoàn về xây dựng “Chi bộ bốn tốt”,“Đảng bộ cơ sở bốn tốt” ban hành ngày, tháng, năm nào?",
+      "options": [
+        "Ngày 02/01/2023",
+        "Ngày 03/01/2023",
+        "Ngày 04/01/2023",
+        "Ngày 05/01/2023"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đồng chí cho biết Chỉ thị số 732-CT/ĐU ngày 12/12/2022 của Thường vụ Đảng ủy Quân khu về xây dựng “Chi bộ bốn tốt”,“Đảng bộ cơ sở bốn tốt” xác định mấy nhiệm vụ và giải pháp thực hiện?",
+      "options": [
+        "8 nhiệm vụ giải pháp",
+        "7 nhiệm vụ giải pháp",
+        "6 nhiệm vụ giải pháp",
+        "5 nhiệm vụ giải pháp"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Đồng chí cho biết nội dung “Chi bộ bốn tốt”, “Đảng bộ cơ sở bốn tốt” theo Chỉ thị 732 của Thường vụ Đảng ủy Quân khu về xây dựng chi bộ bốn tốt”, “đảng bộ cơ sở bốn tốt”?",
+      "options": [
+        "Hoàn thành tốt nhiệm vụ được giao; chất lượng sinh hoạt tốt; đoàn kết, kỷ luật tốt; cán bộ, đảng viên tốt.",
+        "Hoàn thành tốt nhiệm vụ chính trị; chất lượng sinh hoạt tốt; chấp hành kỷ luật tốt; cán bộ, đảng viên tốt.",
+        "Hoàn thành tốt nhiệm vụ chính trị; chất lượng sinh hoạt tốt; đoàn kết, kỷ luật tốt; cán bộ, đảng viên tốt.",
+        "Hoàn thành tốt nhiệm vụ chính trị; chất lượng sinh hoạt tốt; đoàn kết tốt, kỷ luật nghiêm; cán bộ, đảng viên tốt."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biêt theo Hướng dẫn 2292/HD-CT ngày 21/12/2017 của TCCT về Hướng dẫn CTĐ, CTCT rtrong chuyển TTSSCĐ của QĐND và DQTV quy định thời gian họp cấp ủy, chi bộ ở trạng thái SSCĐ cao là bao nhiêu?",
+      "options": [
+        "Không quá 60 phút",
+        "Không quá 45 phút",
+        "Không quá 30 phút",
+        "Không quá 20 phút"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Việc kết nạp vào Đảng những người trên 60 tuổi do cấp nào xem xét, quyết định?",
+      "options": [
+        "Chi bộ và Đảng ủy cơ sở.",
+        "Ban Thường vụ Tỉnh ủy.",
+        "Cấp ủy trực thuộc Trung ương.",
+        "Ban Bí thư Trung ương Đảng."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Người giới thiệu người vào Đảng phải là đảng viên chính thức và cùng công tác ít nhất bao lâu?",
+      "options": [
+        "Ít nhất 6 tháng.",
+        "Ít nhất 12 tháng.",
+        "Ít nhất 24 tháng.",
+        "Không quy định thời gian."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Quy định 144-QĐ/TW xác định chuẩn mực đạo đức cách mạng của cán bộ, đảng viên trong giai đoạn mới gồm mấy điều?",
+      "options": [
+        "3 điều.",
+        "4 điều.",
+        "5 điều.",
+        "19 điều."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Chi bộ có thẩm quyền ra quyết định kỷ luật đảng viên tới hình thức nào?",
+      "options": [
+        "Khiển trách",
+        "Cảnh cáo",
+        "Khiển trách, cảnh cáo (xóa tên trong danh sách đảng viên đối với đảng viên dự bị)",
+        "Khiển trách, cảnh cáo"
+      ],
+      "correct": 3
+    }
+  ],
+  "de4": [
+    {
+      "question": "Hình thức khen thưởng đối với đảng viên?",
+      "options": [
+        "Tặng giấy khen, bằng khen, Huy hiệu Đảng; tặng huân chương, huy chương và các danh hiệu vinh dự khác của Đảng và Nhà nước.",
+        "Tặng giấy khen, bằng khen, Huy hiệu Đảng; tặng huân chương, huy chương.",
+        "Biểu dương, tặng giấy khen, bằng khen, Huy hiệu Đảng và các danh hiệu vinh dự khác của Đảng và Nhà nước.",
+        "Biểu dương, tặng giấy khen, bằng khen, Huy hiệu Đảng; tặng huân chương, huy chương và các danh hiệu vinh dự khác của Đảng và Nhà nước."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Người xin vào Đảng đã được cấp Giấy chứng nhận học lớp bồi dưỡng nhận thức về Đảng, nhưng quá thời hạn nào mà chi bộ chưa xem xét đề nghị kết nạp thì phải học lại để được cấp giấy chứng nhận mới?",
+      "options": [
+        "24 tháng",
+        "36 tháng",
+        "48 tháng",
+        "60 tháng"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Điều lệ Đảng Cộng sản Việt Nam quy định cơ quan lãnh đạo cao nhất của Đảng là cơ quan nào?",
+      "options": [
+        "Ban chấp hành Trung ương.",
+        "Bộ Chính trị",
+        "Ban Bí thư",
+        "Đại hội đại biểu toàn quốc."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn 2292 của TCCT về Hướng dẫn CTĐ, CTCT trong chuyển TTSSCĐ của QĐND và DQTV quy định thời gian họp cấp ủy, chi bộ ở trạng thái SSCĐ toàn bộ là bao nhiêu?",
+      "options": [
+        "Không quá 60 phút",
+        "Không quá 30 phút",
+        "Không quá 45 phút",
+        "Không quá 25 phút"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn 144/HD-CT của Phòng Chính trị Sư đoàn về CTĐ, CTCT trong chuyển TTSSCĐ cấp Trung đoàn, Tiểu đoàn, Đại đội, tổ chức họp cấp uỷ, chi bộ ra nghị quyết lãnh đạo đơn vị thực hiện nhiệm vụ trong trạng thái SSCĐ cao và chuẩn bị mọi mặt để chuyển lên trạng thái SSCĐ toàn bộ ở đâu?",
+      "options": [
+        "Vị trí thường xuyên",
+        "Khu sơ tán",
+        "Khu tập trung bí mật",
+        "Khu tập kết chiến đấu"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đồng chí cho biết theo Quy định số 430/QyĐ-CT của Phòng Chính trị Sư đoàn, có mấy loại kế hoạch CTĐ, CTCT phải mang theo trong thực hiện nhiệm vụ?",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo quy định của Điều lệ Đảng cộng sản Việt Nam, đảng viên dự bị không có quyền nào sau đây?",
+      "options": [
+        "Được thông tin và thảo luận các vấn đề về Cương lĩnh chính trị, Điều lệ Đảng, đường lối, chủ trương, chính sách của Đảng; biểu quyết công việc của Đảng.",
+        "Biểu quyết, ứng cử và bầu cử cơ quan lãnh đạo các cấp của Đảng theo quy định của Ban Chấp hành Trung ương.",
+        "Phê bình và tự phê bình ở mọi cấp trong phạm vi tổ chức; báo cáo, kiến nghị với các cơ quan có trách nhiệm và yêu cầu được trả lời",
+        "Trình bày ý kiến khi tổ chức đảng nhận xét, quyết định công tác hoặc thi hành kỷ luật đối với mình."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Hướng dẫn số 01-HD/TW, Ban Tổ chức Trung ương hướng dẫn kiểm tra tình hình quản lý, sử dụng thẻ đảng viên trong toàn Đảng theo định kỳ:",
+      "options": [
+        "02 năm một lần.",
+        "03 năm một lần.",
+        "04 năm một lần.",
+        "05 năm một lần."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Điều lệ Đảng cộng sản Việt Nam quy định tiến hành xử lý tổ chức đảng và đảng viên vi phạm kỷ luật như thế nào?",
+      "options": [
+        "Tổ chức đảng và đảng viên vi phạm kỷ luật phải xử lý nghiêm túc, chính xác, kịp thời.",
+        "Tổ chức đảng và đảng viên vi phạm kỷ luật phải xử lý công minh, chính xác, kịp thời",
+        "Tổ chức đảng và đảng viên vi phạm kỷ luật phải xử lý công bằng, chính xác, kịp thời.",
+        "Tổ chức đảng và đảng viên vi phạm kỷ luật phải xử lý kiên quyết, công bằng, chính xác, nhanh chóng."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đối với người đang học tập tập trung tại cơ sở đào tạo hoặc đang công tác biệt phái, tổ chức đảng nơi học tập hoặc nơi biệt phái xem xét kết nạp khi thời gian học tập, công tác biệt phái từ:",
+      "options": [
+        "06 tháng trở lên.",
+        "09 tháng trở lên.",
+        "12 tháng trở lên.",
+        "18 tháng trở lên."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Hướng dẫn số 01-HD/TW, đối với người trên 60 tuổi muốn được xem xét kết nạp Đảng, ngoài các điều kiện khác còn phải được:",
+      "options": [
+        "Ban Tổ chức Trung ương đồng ý bằng văn bản.",
+        "Thường trực cấp ủy cấp tỉnh đồng ý bằng văn bản.",
+        "Ban Chấp hành đảng bộ cấp trên trực tiếp đồng ý.",
+        "Ban Thường vụ cấp ủy trực thuộc Trung ương đồng ý bằng văn bản trước khi cấp có thẩm quyền quyết định kết nạp."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Theo Hướng dẫn số 01-HD/TW, trường hợp già làng, trưởng bản, người có uy tín ở vùng đặc biệt khó khăn muốn vào Đảng nhưng không đủ trình độ học vấn thì điều kiện tối thiểu là:",
+      "options": [
+        "Hoàn thành chương trình tiểu học.",
+        "Hoàn thành lớp 5.",
+        "Hoàn thành lớp 3.",
+        "Biết đọc, biết viết chữ quốc ngữ."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Đảng viên chưa đến tuổi nghỉ hưu trong điều kiện lao động bình thường đóng đảng phí bằng bao nhiêu phần trăm mức lương tối thiểu tháng theo vùng trong thời gian từ 01/01/2026 đến hết 31/12/2027?",
+      "options": [
+        "0,2%.",
+        "0,3%.",
+        "0,5%.",
+        "1%."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định, trường hợp đảng viên được xem xét giảm mức đóng đảng phí thì thời hạn giảm tối đa của một lần quyết định là:",
+      "options": [
+        "03 tháng.",
+        "06 tháng.",
+        "12 tháng.",
+        "24 tháng."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết Chỉ thị số 732-CT/ĐU của Thường vụ Đảng ủy Quân khu về xây dựng “Chi bộ bốn tốt”,“Đảng bộ cơ sở bốn tốt” ban hành ngày, tháng, năm nào?",
+      "options": [
+        "Ngày 10/12/2022",
+        "Ngày 11/12/2022",
+        "Ngày 12/12/2022",
+        "Ngày 13/12/2022"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định, từ ngày 01/01/2028, mức đóng đảng phí của đảng viên chưa đến tuổi nghỉ hưu trong điều kiện lao động bình thường là:",
+      "options": [
+        "0,2% mức lương tối thiểu tháng theo vùng.",
+        "0,5% mức lương tối thiểu tháng theo vùng.",
+        "0,3% mức lương tối thiểu tháng theo vùng.",
+        "1% mức lương tối thiểu tháng theo vùng."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định, đảng viên không đóng đảng phí 03 tháng trong năm mà không có lý do chính đáng, chi bộ thực hiện bước nào trước?",
+      "options": [
+        "Xóa tên ngay.",
+        "Khai trừ ngay.",
+        "Xem xét, đề nghị cấp có thẩm quyền quyết định xóa tên.",
+        "Cảnh cáo."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định, từ 01/01/2028, mức đóng của đảng viên đã đến tuổi nghỉ hưu tăng thêm bao nhiêu so với giai đoạn trước?",
+      "options": [
+        "0,1%.",
+        "0,2%.",
+        "0,3%.",
+        "0,5%."
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, chi bộ có từ bao nhiêu đảng viên chính thức trở lên thì bầu chi ủy?",
+      "options": [
+        "Từ 7 đảng viên chính thức trở lên.",
+        "Từ 8 đảng viên chính thức trở lên.",
+        "Từ 9 đảng viên chính thức trở lên.",
+        "Từ 10 đảng viên chính thức trở lên."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết quy trình ra nghị quyết có mấy bước?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, trường hợp thành lập đơn vị mới thì việc thành lập tổ chức đảng được thực hiện:",
+      "options": [
+        "Sau khi đơn vị ổn định tổ chức.",
+        "Đồng thời hoặc kịp thời theo quyết định của cấp có thẩm quyền.",
+        "Sau đại hội nhiệm kỳ đầu tiên.",
+        "Khi đủ số lượng đảng viên theo quy định."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Đồng chí cho biết Chỉ thị số 732-CT/ĐU ngày 12/12/2022 của Thường vụ Đảng ủy Quân khu về xây dựng “Chi bộ bốn tốt”,“Đảng bộ cơ sở bốn tốt” xác định mấy nhiệm vụ và giải pháp thực hiện?",
+      "options": [
+        "8 nhiệm vụ giải pháp",
+        "7 nhiệm vụ giải pháp",
+        "6 nhiệm vụ giải pháp",
+        "5 nhiệm vụ giải pháp"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Đồng chí cho biết nội dung “Chi bộ bốn tốt”, “Đảng bộ cơ sở bốn tốt” theo Chỉ thị 732 của Thường vụ Đảng ủy Quân khu về xây dựng chi bộ bốn tốt”, “đảng bộ cơ sở bốn tốt”?",
+      "options": [
+        "Hoàn thành tốt nhiệm vụ được giao; chất lượng sinh hoạt tốt; đoàn kết, kỷ luật tốt; cán bộ, đảng viên tốt.",
+        "Hoàn thành tốt nhiệm vụ chính trị; chất lượng sinh hoạt tốt; chấp hành kỷ luật tốt; cán bộ, đảng viên tốt.",
+        "Hoàn thành tốt nhiệm vụ chính trị; chất lượng sinh hoạt tốt; đoàn kết, kỷ luật tốt; cán bộ, đảng viên tốt.",
+        "Hoàn thành tốt nhiệm vụ chính trị; chất lượng sinh hoạt tốt; đoàn kết tốt, kỷ luật nghiêm; cán bộ, đảng viên tốt."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biêt theo Hướng dẫn 2292/HD-CT ngày 21/12/2017 của TCCT về Hướng dẫn CTĐ, CTCT rtrong chuyển TTSSCĐ của QĐND và DQTV quy định thời gian họp cấp ủy, chi bộ ở trạng thái SSCĐ cao là bao nhiêu?",
+      "options": [
+        "Không quá 60 phút",
+        "Không quá 45 phút",
+        "Không quá 30 phút",
+        "Không quá 20 phút"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Theo Quy định số 332-QĐ/TW, nội dung nào sau đây là đúng?",
+      "options": [
+        "Mọi đảng ủy cơ sở đều có ban thường vụ.",
+        "Mọi chi bộ đều có chi ủy.",
+        "Đảng ủy bộ phận đều có ban thường vụ.",
+        "Chỉ đảng ủy cơ sở có từ 09 cấp ủy viên trở lên mới bầu ban thường vụ."
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Theo Kết luận số 21-KL/TW, đối tượng phải ngăn chặn, đẩy lùi và xử lý nghiêm là:",
+      "options": [
+        "Cán bộ suy thoái về đạo đức, lối sống.",
+        "Đảng viên suy thoái về tư tưởng chính trị.",
+        "Cán bộ, đảng viên suy thoái về tư tưởng chính trị, đạo đức, lối sống; biểu hiện “tự diễn biến”, “tự chuyển hóa”.",
+        "Tổ chức đảng yếu kém kéo dài."
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Thời lượng tối thiểu của một buổi sinh hoạt chi bộ thường kỳ đối với chi bộ không có chi ủy là:",
+      "options": [
+        "60 phút",
+        "75 phút",
+        "90 phút",
+        "120 phút"
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn số 5119/HD-CT, ngày 25/12/2025 của TCCT, quy định thời gian một buổi sinh hoạt thường kỳ hằng tháng đối với cấp chi bộ là bao nhiêu phút?",
+      "options": [
+        "Tối thiểu 90 phút đối với chi bộ có chi ủy, tối thiểu 60 phút đối với chi bộ không có chi uỷ.",
+        "Tối thiểu 120 phút đối với chi bộ có chi ủy, tối thiểu 90 phút đối với chi bộ không có chi ủy.",
+        "Không quá 60 phút đối với chi bộ không có chi ủy, không quá 90 phút đối với chi bộ có chi ủy.",
+        "Không quá 90 phút đối với chi bộ có chi ủy, không quá 60 phút đối với chi bộ không có chỉ ủy."
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn số 1031/HD-CT của TCCT về một số vấn đề về nghị quyết và chế độ ra nghị quyết lãnh đạo của các cấp uỷ, chi bộ trong Đảng bộ Quân đội có mấy loại Nghị quyết cơ bản?",
+      "options": [
+        "Có 2 loại nghị quyết cơ bản",
+        "Có 3 loại nghị quyết cơ bản",
+        "Có 4 loại nghị quyết cơ bản",
+        "Có 5 loại nghị quyết cơ bản"
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Thời gian dành để thông báo thời sự, quán triệt nghị quyết của cấp trên trong một buổi sinh hoạt chi bộ không được quá:",
+      "options": [
+        "15 phút",
+        "20 phút",
+        "30 phút",
+        "45 phút"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đồng chí cho biết theo Hướng dẫn số 5119/HD-CT, ngày 25/12/2025 của TCCT về một số vấn đề về tiếp tục nâng cao chất lượng sinh hoạt chi bộ trong Đảng bộ Quân đội trong giai đoạn mới, có mấy tiêu chí đánh giá chất lượng sinh hoạt?",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Theo Hướng dẫn, trước thời gian sinh hoạt chi bộ ít nhất bao nhiêu ngày, chi ủy (bí thư, phó bí thư) phải gửi tài liệu sinh hoạt đến đảng viên?",
+      "options": [
+        "Trong ngày tổ chức sinh hoạt",
+        "12 giờ",
+        "Ít nhất 01 ngày",
+        "03 ngày"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Tổ chức đảng bị kỷ luật khiển trách, cảnh cáo do cấp nào quyết định?",
+      "options": [
+        "Cấp ủy cấp trên trực tiếp quyết định.",
+        "Cấp ủy trực thuộc Quân uỷ trung ương quyết định.",
+        "Cấp ủy hoặc ban thường vụ cấp ủy cấp trên trực tiếp quyết định",
+        "Ban Chấp hành Trung ương quyết định"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đảng viên vi phạm một trong các trường hợp nào sau đây thì cấp uỷ và uỷ ban kiểm tra có thẩm quyền trực tiếp xem xét, quyết định kỷ luật, không cần yêu cầu đảng viên đó phải kiểm điểm trước chi bộ?",
+      "options": [
+        "Vi phạm khi thực hiện nhiệm vụ cấp trên giao; nội dung vi phạm liên quan đến bí mật của Đảng và Nhà nước mà chi bộ không biết; vi phạm trước khi chuyển đến sinh hoạt ở chi bộ; vi phạm pháp luật đang bị khởi tố, tạm giam, truy nã, truy tố, xét xử.",
+        "Suy thoái về đạo đức, lối sống; vi phạm kỷ luật nghiêm trọng.",
+        "Vi phạm kỷ luật không gây hậu quả nghiêm trọng.",
+        "Cả 3 đáp án trên đều đúng."
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Theo khung tiêu chí đánh giá chất lượng sinh hoạt chi bộ, tiêu chí “Tổ chức sinh hoạt chi bộ” được chấm tối đa bao nhiêu điểm?",
+      "options": [
+        "25 điểm",
+        "30 điểm",
+        "35 điểm",
+        "40 điểm"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Theo Hướng dẫn, một đảng viên vắng mặt có lý do quá bao nhiêu lần liên tiếp trong năm thì chi bộ không được tính điểm tối đa về tỷ lệ dự sinh hoạt?",
+      "options": [
+        "02 lần",
+        "03 lần",
+        "04 lần",
+        "05 lần"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Chương trình buổi lễ kết nạp đảng viên thực hiện mấy nội dung?",
+      "options": [
+        "6 nội dung",
+        "7 nội dung",
+        "8 nội dung",
+        "9 nội dung"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Thời hiệu xử lý kỷ luật đảng viên vi phạm đối với hình thức Khiển trách là bao lâu?",
+      "options": [
+        "01 năm..",
+        "05 năm.",
+        "10 năm.",
+        "Vô thời hạn."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Phương châm thi hành kỷ luật của Đảng là gì?",
+      "options": [
+        "Nghiêm minh, chính xác, kịp thời",
+        "Tự giác, nghiêm minh",
+        "Công minh, chính xác, kịp thời",
+        "Nghiêm minh, tự giác, kịp thời"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Quy định số 21-QĐ/TW, ngày 11/4/2026 của Ban Chấp hành Trung ương “Quy định về công tác Kiểm tra, giám sát và kỷ luật của Đảng”, các hình thức kỷ luật đối với tổ chức đảng gồm?",
+      "options": [
+        "Khiển trách, cảnh cáo, xóa tên",
+        "Khiển trách, cảnh cáo, giải tán",
+        "Khiển trách, cảnh cáo, giải thể",
+        "Khiển trách, cảnh cáo"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Thẻ đảng viên được kiểm tra định kỳ bao lâu một lần?",
+      "options": [
+        "Hằng năm.",
+        "5 năm một lần.",
+        "10 năm một lần.",
+        "Mỗi khi chuyển sinh hoạt đảng."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Hình thức khen thưởng đối với tổ chức đảng?",
+      "options": [
+        "Biểu dương, tặng giấy khen, bằng khen, Huy hiệu Đảng, tặng cờ, tặng thưởng huân chương, huy chương và các danh hiệu vinh dự khác của Đảng và Nhà nước.",
+        "Biểu dương, tặng giấy khen, bằng khen, tặng cờ, tặng thưởng huân chương, huy chương và các danh hiệu vinh dự khác của Đảng và Nhà nước.",
+        "Tặng giấy khen, bằng khen, Huy hiệu Đảng, tặng cờ, tặng thưởng huân chương, huy chương và các danh hiệu vinh dự khác của Đảng và Nhà nước.",
+        "Tặng giấy khen, bằng khen, tặng cờ, tặng thưởng huân chương, huy chương và các danh hiệu vinh dự khác của Đảng và Nhà nước."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Quy định số 21-QĐ/TW, ngày 11/4/2026 của Ban Chấp hành Trung ương “Quy định về công tác Kiểm tra, giám sát và kỷ luật của Đảng”, các hình thức kỷ luật đối với đảng viên chính thức gồm?",
+      "options": [
+        "Khiển trách, cảnh cáo, cách chức, khai trừ",
+        "Khiển trách, cảnh cáo, cách chức, xoá tên",
+        "Khiển trách, cảnh cáo, xoá tên",
+        "Khiển trách, cảnh cáo, cách chức"
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Đảng viên dự bị có quyền biểu quyết tại chi bộ không?",
+      "options": [
+        "Có, quyền lợi như đảng viên chính thức",
+        "Không có quyền biểu quyết.",
+        "Chỉ được biểu quyết các vấn đề nhỏ.",
+        "Được biểu quyết nếu bí thư cho phép."
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Chi bộ có thẩm quyền ra quyết định kỷ luật đảng viên tới hình thức nào?",
+      "options": [
+        "Khiển trách",
+        "Cảnh cáo",
+        "Khiển trách, cảnh cáo (xóa tên trong danh sách đảng viên đối với đảng viên dự bị)",
+        "Khiển trách, cảnh cáo"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "Quy định số 21-QĐ/TW của Ban Chấp hành Trung ương “Quy định về công tác Kiểm tra, giám sát và kỷ luật của Đảng” ban hành ngày, tháng, năm nào?",
+      "options": [
+        "Ngày 28/7/2021",
+        "Ngày 27/7/2021",
+        "Ngày 11/4/2026",
+        "Ngày 08/4/2026"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Đảng viên được miễn công tác và sinh hoạt đảng trong trường hợp nào?",
+      "options": [
+        "Tuổi cao, sức yếu có xác nhận của y tế hoặc đi làm ăn xa có lý do chính đáng.",
+        "Khi cảm thấy không còn hứng thú sinh hoạt.",
+        "Khi bận việc gia đình thường xuyên.",
+        "Khi là lãnh đạo cao cấp."
+      ],
+      "correct": 0
+    },
+    {
+      "question": "Đảng viên sinh hoạt đảng tạm thời, nếu vi phạm kỷ luật thì cấp uỷ nơi đảng viên sinh hoạt tạm thời có trách nhiệm xem xét, xử lý kỷ luật tới mức nào?",
+      "options": [
+        "Khiển trách",
+        "Cảnh cáo",
+        "Cách chức",
+        "Khai trừ"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "Việc kết nạp vào Đảng đối với người trên 60 tuổi do cấp nào xem xét, quyết định?",
+      "options": [
+        "Ban Thường vụ tỉnh ủy và tương đương",
+        "Ban Bí thư",
+        "Cấp ủy trực thuộc Trung ương",
+        "Bộ Chính trị"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "Kết luận số 01-KL/TW ngày 18/5/2021 của Bộ Chính trị nói về vấn đề gì?",
+      "options": [
+        "Về tiếp tục học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh trong giai đoạn mới.",
+        "Về xây dựng Đảng và hệ thống chính trị, ngăn chặn “tự diễn biến”, “tự chuyển hóa” trong nội bộ.",
+        "Về tiếp tục thực hiện Chỉ thị số 05-CT/TW của Bộ Chính trị “Về đẩy mạnh học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh”.",
+        "Về thi hành điều lệ Đảng."
+      ],
+      "correct": 2
+    }
+  ]
+};
+
+const EXAM_META = {
+  de1: { label: "Đề số 01" },
+  de2: { label: "Đề số 02" },
+  de3: { label: "Đề số 03" },
+  de4: { label: "Đề số 04" },
+};
+
+const TEST_DURATION_SEC = 40 * 60; // 40 minutes
+
+/* ================= STATE ================= */
+let currentPracticeExam = null; // {key, questions:[{question,options,correctIndex}], answered:[]}
+let currentTestExam = null;     // {key, questions:[...], answers:[], startTime, timerInterval, remaining}
+
+/* ================= UTIL ================= */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function buildShuffledExam(key){
+  const original = EXAMS_RAW[key];
+  const qOrder = shuffle(original.map((_,i)=>i));
+  const questions = qOrder.map(idx=>{
+    const q = original[idx];
+    const optOrder = shuffle(q.options.map((_,i)=>i));
+    const options = optOrder.map(oi=>q.options[oi]);
+    const correctIndex = optOrder.indexOf(q.correct);
+    return { question:q.question, options, correctIndex };
+  });
+  return questions;
+}
+
+function letterFor(i){ return ["A","B","C","D"][i]; }
+
+function bestScoreKey(key){ return "examBest_"+key; }
+function getBestScore(key){
+  const v = localStorage.getItem(bestScoreKey(key));
+  return v ? JSON.parse(v) : null;
+}
+function setBestScore(key, correct, total){
+  const cur = getBestScore(key);
+  if(!cur || correct > cur.correct){
+    localStorage.setItem(bestScoreKey(key), JSON.stringify({correct, total}));
+  }
+}
+
+/* ================= TAB SWITCH ================= */
+const tabPractice = document.getElementById('tab-practice');
+const tabTest = document.getElementById('tab-test');
+
+function showView(view){
+  ['practice-home','practice-quiz','test-home','test-quiz','test-result'].forEach(id=>{
+    document.getElementById(id).classList.add('hidden');
+  });
+  document.getElementById(view).classList.remove('hidden');
+}
+
+tabPractice.addEventListener('click', ()=>{
+  tabPractice.classList.add('active'); tabTest.classList.remove('active');
+  if(currentTestExam && currentTestExam.timerInterval) return; // don't interrupt active test silently, but allow tab view anyway
+  showView('practice-home');
+});
+tabTest.addEventListener('click', ()=>{
+  tabTest.classList.add('active'); tabPractice.classList.remove('active');
+  showView('test-home');
+});
+
+function exitToHome(mode){
+  if(mode==='practice'){ showView('practice-home'); }
+  else{
+    if(currentTestExam && currentTestExam.timerInterval){ clearInterval(currentTestExam.timerInterval); currentTestExam=null; }
+    showView('test-home');
+  }
+}
+function confirmExitTest(){
+  if(confirm("Thoát bài thi? Kết quả làm dở sẽ không được lưu.")){
+    exitToHome('test');
+  }
+}
+
+/* ================= RENDER PICKER CARDS ================= */
+function renderPickers(){
+  const pg = document.getElementById('practice-grid');
+  const tg = document.getElementById('test-grid');
+  pg.innerHTML=''; tg.innerHTML='';
+  Object.keys(EXAM_META).forEach(key=>{
+    const total = EXAMS_RAW[key].length;
+    const meta = EXAM_META[key];
+
+    const pCard = document.createElement('div');
+    pCard.className='exam-card';
+    pCard.innerHTML = `
+      <div class="tag">Ôn luyện</div>
+      <h3>${meta.label}</h3>
+      <div class="meta"><span>${total} câu hỏi</span><span>Có đáp án ngay</span></div>
+      <div class="go">Bắt đầu ôn tập
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+      </div>`;
+    pCard.onclick = ()=>startPractice(key);
+    pg.appendChild(pCard);
+
+    const best = getBestScore(key);
+    const tCard = document.createElement('div');
+    tCard.className='exam-card';
+    tCard.innerHTML = `
+      <div class="tag">Thi thật</div>
+      <h3>${meta.label}</h3>
+      <div class="meta"><span>${total} câu hỏi</span><span>40 phút</span></div>
+      ${best ? `<div class="best">★ Điểm cao nhất: ${best.correct}/${best.total}</div>` : ''}
+      <div class="go">Bắt đầu thi
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+      </div>`;
+    tCard.onclick = ()=>startTest(key);
+    tg.appendChild(tCard);
+  });
+}
+
+/* ================= PRACTICE MODE ================= */
+function startPractice(key){
+  const questions = buildShuffledExam(key);
+  currentPracticeExam = { key, questions, answered: new Array(questions.length).fill(null) };
+  document.getElementById('practice-title').textContent = EXAM_META[key].label;
+  renderPracticeQuestions();
+  updatePracticeProgress();
+  showView('practice-quiz');
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+function renderPracticeQuestions(){
+  const container = document.getElementById('practice-questions');
+  container.innerHTML = '';
+  currentPracticeExam.questions.forEach((q, qi)=>{
+    const card = document.createElement('div');
+    card.className='qcard';
+    card.innerHTML = `
+      <div class="qhead">
+        <span class="qnum">Câu ${qi+1}</span>
+        <span class="qtext">${escapeHtml(q.question)}</span>
+      </div>
+      <div class="options" id="p-opts-${qi}"></div>
+    `;
+    container.appendChild(card);
+    const optsWrap = card.querySelector(`#p-opts-${qi}`);
+    q.options.forEach((opt, oi)=>{
+      const el = document.createElement('div');
+      el.className='option';
+      el.innerHTML = `<span class="letter">${letterFor(oi)}</span><span class="otext">${escapeHtml(opt)}</span><span class="mark"></span>`;
+      el.onclick = ()=>answerPractice(qi, oi);
+      optsWrap.appendChild(el);
     });
-  }
-}
-
-/* ---- COLLAPSIBLE ---- */
-function toggleAddSec(){
-  addOpen=!addOpen;
-  const b=document.getElementById('addBody');
-  const a=document.getElementById('addArrow');
-  const l=document.getElementById('addSecLbl');
-  if(addOpen){b.classList.remove('collapsed');a.classList.add('open');a.textContent='▲';l.textContent='Thu gọn'}
-  else{b.classList.add('collapsed');a.classList.remove('open');a.textContent='▼';l.textContent='Mở rộng'}
-}
-
-/* ---- EXPORT ---- */
-function openExport(){document.getElementById('expOv').classList.add('open')}
-function closeExp(){document.getElementById('expOv').classList.remove('open')}
-document.getElementById('expOv').addEventListener('click',function(e){if(e.target===this)closeExp()});
-function dlFile(content,name,mime){
-  const b=new Blob([content],{type:mime});const u=URL.createObjectURL(b);
-  const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);
-}
-function calcRemList(){let b=state.totalFund;return state.rows.map(r=>{b-=(r.amount||0);return b})}
-function calcSpent(){return state.rows.reduce((s,r)=>s+(r.amount||0),0)}
-function expCSV(){
-  const rl=calcRemList();
-  let rows=[['STT','Ngày','Nội dung','Số tiền (K đ)','Còn lại (K đ)']];
-  state.rows.forEach((r,i)=>rows.push([i+1,r.date||'',`"${(r.content||'').replace(/"/g,'""')}"`,r.amount||0,isNaN(rl[i])?'':rl[i]]));
-  rows.push([]);rows.push(['=== THỐNG KÊ QUỸ ===']);
-  rows.push(['Tiền gốc',state.initialFund]);rows.push(['Tổng quỹ',state.totalFund]);
-  rows.push(['Đã chi',calcSpent()]);rows.push(['Còn lại',state.totalFund-calcSpent()]);
-  if(state.addEntries.length){rows.push([]);rows.push(['=== LỊCH SỬ THÊM TIỀN ===']);rows.push(['Ngày','Ghi chú','Số tiền']);
-    state.addEntries.forEach(e=>rows.push([e.date,`"${(e.note||'').replace(/"/g,'""')}"`,e.amount]));}
-  dlFile('\uFEFF'+rows.map(r=>r.join(',')).join('\n'),`chi-tieu-${today()}.csv`,'text/csv;charset=utf-8;');
-  closeExp();toast('✅ Đã xuất CSV!','ok');
-}
-function expJSON(){
-  const d={exportedAt:new Date().toISOString(),fund:{initialFund:state.initialFund,totalFund:state.totalFund,totalSpent:calcSpent(),remaining:state.totalFund-calcSpent()},addEntries:state.addEntries,rows:state.rows};
-  dlFile(JSON.stringify(d,null,2),`chi-tieu-${today()}.json`,'application/json');
-  closeExp();toast('✅ Đã xuất JSON!','ok');
-}
-function expTXT(){
-  const rl=calcRemList();const sep='─'.repeat(55)+'\n';
-  let t='╔═══════════════════════════════════════════════════╗\n║  BÁO CÁO CHI TIÊU CÁ NHÂN                       ║\n╚═══════════════════════════════════════════════════╝\n\n';
-  t+=`[ THỐNG KÊ QUỸ ]\n${sep}`;
-  t+=`  Tiền gốc  : ${fmt(state.initialFund)} (${fmtFull(state.initialFund)})\n`;
-  t+=`  Tổng quỹ  : ${fmt(state.totalFund)} (${fmtFull(state.totalFund)})\n`;
-  t+=`  Đã chi    : ${fmt(calcSpent())} (${fmtFull(calcSpent())})\n`;
-  t+=`  Còn lại   : ${fmt(state.totalFund-calcSpent())} (${fmtFull(state.totalFund-calcSpent())})\n\n`;
-  if(state.addEntries.length){t+=`[ LỊCH SỬ THÊM TIỀN ]\n${sep}`;state.addEntries.forEach(e=>{t+=`  ${e.date}  ${(e.note||'').substring(0,20).padEnd(20)}  +${fmt(e.amount)}\n`});t+='\n'}
-  t+=`[ CHI TIẾT CHI TIÊU ]\n${sep}`;
-  t+=`${'STT'.padEnd(4)}  ${'Ngày'.padEnd(11)}  ${'Nội dung'.padEnd(22)}  ${'Số tiền'.padStart(11)}  ${'Còn lại'.padStart(13)}\n${sep}`;
-  state.rows.forEach((r,i)=>{t+=`${String(i+1).padEnd(4)}  ${(r.date||'').padEnd(11)}  ${(r.content||'').substring(0,22).padEnd(22)}  ${fmt(r.amount).padStart(11)}  ${fmt(rl[i]).padStart(13)}\n`});
-  dlFile('\uFEFF'+t,`chi-tieu-${today()}.txt`,'text/plain;charset=utf-8;');
-  closeExp();toast('✅ Đã xuất TXT!','ok');
-}
-
-/* ---- FUND MANAGEMENT ---- */
-function reqSetInit(){
-  if(!ul.init){toast('⚠️ Mở khoá ô tiền gốc trước!','warn');return}
-  const v=parseFloat(document.getElementById('inpInit').value);
-  if(!v||v<=0){toast('⚠️ Nhập số tiền gốc!','warn');return}
-  if(state.initialFund>0)askPw('Xác nhận thay đổi tiền gốc.',()=>doSetInit(v));
-  else doSetInit(v);
-}
-function doSetInit(v){
-  const oldAdd=state.totalFund-state.initialFund;
-  state.initialFund=v;state.totalFund=v+oldAdd;
-  document.getElementById('inpInit').value='';document.getElementById('hintInit').textContent='';
-  lockSec('init');saveData();render();toast(`✓ Đặt tiền gốc: ${fmt(v)}`,'ok');
-}
-function reqAddFund(){
-  if(!ul.add){toast('⚠️ Mở khoá phần thêm tiền trước!','warn');return}
-  const v=parseFloat(document.getElementById('inpAddAmt').value);
-  if(!v||v<=0){toast('⚠️ Nhập số tiền!','warn');return}
-  askPw('Xác nhận thêm tiền vào quỹ.',()=>doAddFund(v));
-}
-function doAddFund(v){
-  const note=document.getElementById('inpAddNote').value.trim()||'Thêm tiền';
-  state.totalFund+=v;state.addEntries.push({id:Date.now(),date:today(),note,amount:v});
-  document.getElementById('inpAddAmt').value='';document.getElementById('inpAddNote').value='';document.getElementById('hintAdd').textContent='';
-  lockSec('add');saveData();render();toast(`✓ Đã thêm ${fmt(v)}`,'ok');
-}
-function reqDelAddEntry(id){
-  askPw('Xác nhận xóa lần thêm tiền này.',()=>{
-    const e=state.addEntries.find(x=>x.id===id);if(e)state.totalFund-=e.amount;
-    state.addEntries=state.addEntries.filter(x=>x.id!==id);
-    saveData();render();toast('🗑️ Đã xóa lần thêm tiền.','');
   });
 }
 
-/* ---- ROWS ---- */
-let _rid=Date.now();
-function reqAddRow(){askPw('Xác nhận thêm dòng chi tiêu.',doAddRow)}
-function doAddRow(){
-  state.rows.push({id:++_rid,date:today(),content:'',amount:0});
-  saveData();render();
-  setTimeout(()=>{const all=document.querySelectorAll('td input[data-f="content"]');if(all.length)all[all.length-1].focus()},80);
+function answerPractice(qi, oi){
+  if(currentPracticeExam.answered[qi] !== null) return; // already answered, lock
+  currentPracticeExam.answered[qi] = oi;
+  const q = currentPracticeExam.questions[qi];
+  const optsWrap = document.getElementById(`p-opts-${qi}`);
+  const optEls = optsWrap.querySelectorAll('.option');
+  optEls.forEach((el, idx)=>{
+    el.classList.add('locked');
+    if(idx === q.correctIndex){
+      el.classList.add('correct');
+      el.querySelector('.mark').textContent = '✓ Đáp án đúng';
+    } else if(idx === oi){
+      el.classList.add('wrong');
+      el.querySelector('.mark').textContent = '✗ Bạn đã chọn';
+    } else {
+      el.classList.add('dim');
+    }
+  });
+  updatePracticeProgress();
 }
-function reqDelRow(id){
-  askPw('Xác nhận xóa dòng chi tiêu.',()=>{
-    state.rows=state.rows.filter(r=>r.id!==id);saveData();render();toast('🗑️ Đã xóa dòng.','');
+
+function updatePracticeProgress(){
+  const total = currentPracticeExam.questions.length;
+  const answeredArr = currentPracticeExam.answered;
+  const answeredCount = answeredArr.filter(a=>a!==null).length;
+  const correctCount = answeredArr.filter((a,i)=> a!==null && a===currentPracticeExam.questions[i].correctIndex).length;
+  document.getElementById('practice-score').textContent = `${correctCount} / ${answeredCount} đúng`;
+  document.getElementById('practice-progress').style.width = (answeredCount/total*100)+'%';
+}
+
+/* ================= TEST MODE ================= */
+function startTest(key){
+  const questions = buildShuffledExam(key);
+  currentTestExam = {
+    key, questions,
+    answers: new Array(questions.length).fill(null),
+    remaining: TEST_DURATION_SEC,
+    timerInterval: null,
+  };
+  document.getElementById('test-title').textContent = EXAM_META[key].label;
+  document.getElementById('test-warning').classList.add('hidden');
+  renderTestQuestions();
+  updateTestProgress();
+  startTimer();
+  showView('test-quiz');
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+function retryTest(){
+  const key = currentTestExam ? currentTestExam.key : lastTestKey;
+  startTest(key);
+}
+
+function renderTestQuestions(){
+  const container = document.getElementById('test-questions');
+  container.innerHTML = '';
+  currentTestExam.questions.forEach((q, qi)=>{
+    const card = document.createElement('div');
+    card.className='qcard';
+    card.innerHTML = `
+      <div class="qhead">
+        <span class="qnum">Câu ${qi+1}</span>
+        <span class="qtext">${escapeHtml(q.question)}</span>
+      </div>
+      <div class="options" id="t-opts-${qi}"></div>
+    `;
+    container.appendChild(card);
+    const optsWrap = card.querySelector(`#t-opts-${qi}`);
+    q.options.forEach((opt, oi)=>{
+      const el = document.createElement('div');
+      el.className='option';
+      el.innerHTML = `<span class="letter">${letterFor(oi)}</span><span class="otext">${escapeHtml(opt)}</span>`;
+      el.onclick = ()=>selectTestAnswer(qi, oi);
+      optsWrap.appendChild(el);
+    });
   });
 }
-function updateRow(id,field,value){
-  if(field==='amount'&&!ul.tbl){
-    toast('🔒 Mở khoá bảng để chỉnh sửa số tiền!','warn');
-    const row=state.rows.find(r=>r.id===id);
-    if(row){const inp=document.querySelector(`td input[data-id="${id}"][data-f="amount"]`);if(inp)inp.value=row.amount||''}
+
+function selectTestAnswer(qi, oi){
+  currentTestExam.answers[qi] = oi;
+  const optsWrap = document.getElementById(`t-opts-${qi}`);
+  optsWrap.querySelectorAll('.option').forEach((el,idx)=>{
+    el.classList.toggle('correct', false);
+    if(idx===oi){ el.style.borderColor='var(--green-mid)'; el.style.background='var(--green-soft)'; }
+    else { el.style.borderColor=''; el.style.background=''; }
+  });
+  updateTestProgress();
+}
+
+function updateTestProgress(){
+  const total = currentTestExam.questions.length;
+  const answeredCount = currentTestExam.answers.filter(a=>a!==null).length;
+  document.getElementById('test-answered').textContent = `${answeredCount} / ${total} đã chọn`;
+  document.getElementById('test-progress').style.width = (answeredCount/total*100)+'%';
+}
+
+function startTimer(){
+  updateTimerDisplay();
+  currentTestExam.timerInterval = setInterval(()=>{
+    currentTestExam.remaining--;
+    updateTimerDisplay();
+    if(currentTestExam.remaining <= 0){
+      clearInterval(currentTestExam.timerInterval);
+      submitTest(true);
+    }
+  }, 1000);
+}
+function updateTimerDisplay(){
+  const r = currentTestExam.remaining;
+  const m = Math.floor(r/60), s = r%60;
+  document.getElementById('test-timer').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+let lastTestKey = null;
+
+function submitTest(auto){
+  const total = currentTestExam.questions.length;
+  const answeredCount = currentTestExam.answers.filter(a=>a!==null).length;
+  if(!auto && answeredCount < total){
+    document.getElementById('test-warning').classList.remove('hidden');
+    document.getElementById('test-warning').textContent = `Bạn còn ${total-answeredCount} câu chưa trả lời. Vui lòng hoàn thành trước khi nộp bài.`;
     return;
   }
-  const row=state.rows.find(r=>r.id===id);if(!row)return;
-  if(field==='amount')row[field]=parseFloat(value)||0;else row[field]=value;
-  saveData();recalcTotals();
-}
-function onCK(e,id){
-  if(e.key==='Enter'||e.key==='Tab'){e.preventDefault();const tr=e.target.closest('tr');if(tr){const a=tr.querySelector('input[data-f="amount"]');if(a)a.focus()}}
-}
+  if(currentTestExam.timerInterval) clearInterval(currentTestExam.timerInterval);
+  lastTestKey = currentTestExam.key;
 
-/* ---- WEEKS ---- */
-function toggleWk(k){
-  wkCol[k]=!wkCol[k];
-  const h=document.querySelector(`tr.wkhdr[data-w="${k}"]`);
-  const rs=document.querySelectorAll(`tr.wkd[data-w="${k}"]`);
-  if(wkCol[k]){h&&h.classList.add('col');rs.forEach(r=>r.classList.add('hid'))}
-  else{h&&h.classList.remove('col');rs.forEach(r=>r.classList.remove('hid'))}
-}
-function toggleAllWeeks(){
-  allCol=!allCol;
-  const keys=[...new Set(state.rows.map(r=>getWkKey(r.date)))];
-  keys.forEach(k=>{wkCol[k]=allCol});render();
-}
-
-/* ---- RENDER ---- */
-function calcRemList2(){let b=state.totalFund;return state.rows.map(r=>{b-=(r.amount||0);return b})}
-
-function render(){
-  document.getElementById('monthBadge').textContent=currentMonth();
-  const spent=calcSpent();const left=state.totalFund-spent;
-  document.getElementById('sTotalFund').textContent=fmt(state.totalFund);
-  document.getElementById('sTotalSpent').textContent=fmt(spent);
-  document.getElementById('sTotalLeft').textContent=fmt(left);
-  renderAE();renderTable();
-}
-
-function renderAE(){
-  const el=document.getElementById('aeList');
-  if(!state.addEntries||!state.addEntries.length){el.innerHTML='';return}
-  el.innerHTML=`<div style="font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:10px 0 6px">Lịch sử thêm tiền</div>`+
-    state.addEntries.map(e=>`<div class="ae-item">
-      <span class="ae-dt">📅 ${e.date}</span>
-      <span class="ae-note">${escH(e.note||'')}</span>
-      <span class="ae-amt">+${fmt(e.amount)} <span style="font-size:.67rem;font-weight:400;color:var(--muted)">(${fmtFull(e.amount)})</span></span>
-      <button class="ae-del" onclick="reqDelAddEntry(${e.id})">✕</button>
-    </div>`).join('');
-}
-
-function renderTable(){
-  const tbody=document.getElementById('tblBody');
-  const empty=document.getElementById('emptyState');
-  if(!state.rows.length){tbody.innerHTML='';empty.style.display='block';return}
-  empty.style.display='none';
-  const rl=calcRemList2();
-  const groups=[];let curWk=null;
-  state.rows.forEach((row,i)=>{
-    const wk=getWkKey(row.date);
-    if(wk!==curWk){curWk=wk;groups.push({wk,label:getWkLabel(row.date),rows:[]})}
-    groups[groups.length-1].rows.push({row,i});
+  let correct = 0;
+  currentTestExam.questions.forEach((q,i)=>{
+    if(currentTestExam.answers[i] === q.correctIndex) correct++;
   });
-  let html='';let stt=1;const amtLocked=!ul.tbl;
-  groups.forEach(g=>{
-    const col=!!wkCol[g.wk];
-    const wkSpent=g.rows.reduce((s,{row})=>s+(row.amount||0),0);
-    html+=`<tr class="wkhdr${col?' col':''}" data-w="${escH(g.wk)}" onclick="toggleWk('${escH(g.wk)}')">
-      <td colspan="6">📅 ${escH(g.label)}<span style="margin-left:10px;opacity:.7;font-size:.65rem">Chi: ${fmt(wkSpent)}</span><span class="wktog">▼</span></td>
-    </tr>`;
-    g.rows.forEach(({row,i})=>{
-      const rem=rl[i];const neg=rem<0;const af=row.amount>0?fmtFull(row.amount):'';
-      const rf=isNaN(rem)?'':fmtFull(rem);const lc=amtLocked?' cl':'';const la=amtLocked?' readonly':'';
-      html+=`<tr class="wkd ${neg?'neg':'pos'}${col?' hid':''}" data-w="${escH(g.wk)}" data-id="${row.id}">
-        <td class="stt">${stt++}</td>
-        <td class="col-dt"><input type="date" value="${row.date||''}" data-id="${row.id}" data-f="date" onchange="updateRow(${row.id},'date',this.value)"/></td>
-        <td class="col-ct"><input type="text" value="${escH(row.content||'')}" placeholder="Nhập nội dung..." data-id="${row.id}" data-f="content" oninput="updateRow(${row.id},'content',this.value)" onkeydown="onCK(event,${row.id})"/></td>
-        <td class="col-amt">
-          <input type="number" value="${row.amount||''}" placeholder="0" min="0" data-id="${row.id}" data-f="amount" class="${lc.trim()}" ${la} oninput="updateRow(${row.id},'amount',this.value)" style="text-align:right" title="${af}"/>
-          ${af?`<div style="font-size:.62rem;color:var(--muted);text-align:right;padding:0 5px">${af}</div>`:''}
-        </td>
-        <td class="col-rem" style="color:${neg?'var(--danger)':'var(--success)'}">
-          ${isNaN(rem)?'—':fmt(rem)}
-          ${rf?`<div style="font-size:.62rem;opacity:.7">${rf}</div>`:''}
-        </td>
-        <td class="col-ac"><button class="btn-del" onclick="reqDelRow(${row.id})">✕</button></td>
-      </tr>`;
-    });
-  });
-  tbody.innerHTML=html;
+  const wrong = total - correct;
+  const timeUsed = TEST_DURATION_SEC - currentTestExam.remaining;
+  setBestScore(currentTestExam.key, correct, total);
+
+  renderResult(correct, wrong, total, timeUsed);
+  showView('test-result');
+  window.scrollTo({top:0, behavior:'instant'});
 }
 
-function recalcTotals(){
-  const spent=calcSpent();const left=state.totalFund-spent;
-  document.getElementById('sTotalFund').textContent=fmt(state.totalFund);
-  document.getElementById('sTotalSpent').textContent=fmt(spent);
-  document.getElementById('sTotalLeft').textContent=fmt(left);
-  const rl=calcRemList2();
-  let i=0;
-  document.querySelectorAll('tbody tr.wkd[data-id]').forEach(tr=>{
-    const rem=rl[i];const neg=rem<0;
-    tr.className=tr.className.replace('neg','').replace('pos','').trim()+' '+(neg?'neg':'pos');
-    const rc=tr.querySelector('.col-rem');
-    if(rc){const rf=isNaN(rem)?'':fmtFull(rem);rc.innerHTML=(isNaN(rem)?'—':fmt(rem))+(rf?`<div style="font-size:.62rem;opacity:.7">${rf}</div>`:'');rc.style.color=neg?'var(--danger)':'var(--success)'}
-    const ai=tr.querySelector('input[data-f="amount"]');
-    if(ai){const hd=ai.nextElementSibling;if(hd&&hd.tagName==='DIV')hd.textContent=parseFloat(ai.value)>0?fmtFull(parseFloat(ai.value)):''}
-    i++;
+function renderResult(correct, wrong, total, timeUsed){
+  const pct = Math.round(correct/total*100);
+  document.getElementById('seal-score').textContent = pct+'%';
+  document.getElementById('stat-correct').textContent = correct;
+  document.getElementById('stat-wrong').textContent = wrong;
+  const m = Math.floor(timeUsed/60), s = timeUsed%60;
+  document.getElementById('stat-time').textContent = `${m}:${String(s).padStart(2,'0')}`;
+
+  let headline, sub;
+  if(pct >= 90){ headline='Xuất sắc!'; sub='Kết quả rất tốt, tiếp tục phát huy.'; }
+  else if(pct >= 70){ headline='Đạt yêu cầu'; sub='Kết quả khá tốt, ôn lại các câu sai để hoàn thiện hơn.'; }
+  else if(pct >= 50){ headline='Cần ôn thêm'; sub='Nên xem lại phần Ôn luyện trước khi thi lại.'; }
+  else{ headline='Chưa đạt'; sub='Hãy dành thêm thời gian ôn luyện các đề trước khi thi lại.'; }
+  document.getElementById('result-headline').textContent = headline;
+  document.getElementById('result-sub').textContent = sub + ` (${correct}/${total} câu đúng)`;
+
+  const list = document.getElementById('review-list');
+  list.innerHTML = '';
+  currentTestExam.questions.forEach((q,i)=>{
+    const yourAns = currentTestExam.answers[i];
+    const isCorrect = yourAns === q.correctIndex;
+    const item = document.createElement('div');
+    item.className='review-item';
+    item.innerHTML = `
+      <div class="review-badge ${isCorrect?'ok':'no'}">Câu ${i+1} — ${isCorrect?'ĐÚNG':'SAI'}</div>
+      <div class="qtext">${escapeHtml(q.question)}</div>
+      ${!isCorrect ? `<div class="review-line your-wrong">Bạn chọn: ${letterFor(yourAns)}. ${escapeHtml(q.options[yourAns])}</div>` : ''}
+      <div class="review-line correct">Đáp án đúng: ${letterFor(q.correctIndex)}. ${escapeHtml(q.options[q.correctIndex])}</div>
+    `;
+    list.appendChild(item);
   });
 }
 
-/* ---- INIT ---- */
-loadData();
+/* ================= HELPERS ================= */
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+/* ================= INIT ================= */
+renderPickers();
+showView('practice-home');
 </script>
 </body>
 </html>
