@@ -550,14 +550,7 @@ function renderPractice(deId){
   });
 
   const content = document.getElementById(`deContent-${deId}`);
-  let html = `
-    <div class="sticky-bar">
-      <div class="left">
-        <span class="count-pill" id="pracCount-${deId}">0 / ${items.length} đã làm</span>
-      </div>
-      <button class="btn ghost" id="pracReshuffle-${deId}" style="width:auto;">🔀 Xáo trộn lại</button>
-    </div>
-  `;
+  let html = '';
   order.forEach((n,i)=>{
     const q = items.find(d=>d.n===n);
     html += `<div class="card" data-qn="${n}">
@@ -568,9 +561,6 @@ function renderPractice(deId){
   });
   content.innerHTML = html;
 
-  document.getElementById(`pracReshuffle-${deId}`).addEventListener('click', ()=> renderPractice(deId));
-
-  let answeredCount = 0;
   order.forEach(n=>{
     const opts = optCache[n];
     const wrap = document.getElementById(`pracOptions-${deId}-${n}`);
@@ -596,8 +586,6 @@ function renderPractice(deId){
         tagEl.innerHTML = isCorrect
           ? '<span style="color:var(--green); font-weight:700; font-size:11px; text-transform:uppercase;">✓ Đúng</span>'
           : '<span style="color:var(--wrong); font-weight:700; font-size:11px; text-transform:uppercase;">✕ Sai</span>';
-        answeredCount++;
-        document.getElementById(`pracCount-${deId}`).textContent = `${answeredCount} / ${items.length} đã làm`;
       });
       wrap.appendChild(el);
     });
