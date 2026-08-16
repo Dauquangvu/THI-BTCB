@@ -301,19 +301,17 @@ button.btn:disabled{opacity:.45; cursor:not-allowed;}
 .opt.wrong .opt-letter{background:var(--wrong);}
 .opt.locked{cursor:default;}
 
-/* ===== Sticky bar (exam + practice list header) ===== */
+/* ===== Sticky bar (exam + practice list header) — timer-only floating badge ===== */
 .sticky-bar{
   position:sticky; top:88px; z-index:40;
-  background:linear-gradient(180deg, #fff, var(--linen));
-  border:1px solid var(--line-strong); border-radius:var(--radius);
-  padding:12px 16px; margin-bottom:16px; box-shadow:var(--shadow);
-  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  display:flex; justify-content:flex-end;
+  margin-bottom:16px; pointer-events:none;
 }
-.sticky-bar .left{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.sticky-bar .left{display:flex; align-items:center; gap:10px; flex-wrap:wrap; pointer-events:auto;}
 .timer-pill{
   font-family:var(--font-display); font-size:16px; letter-spacing:.03em;
-  background:var(--red-800); color:var(--gold-bright); padding:7px 16px; border-radius:999px;
-  border:1px solid var(--gold-600);
+  background:var(--red-800); color:var(--gold-bright); padding:9px 20px; border-radius:999px;
+  border:1px solid var(--gold-600); box-shadow:var(--shadow);
 }
 .timer-pill.low{background:var(--wrong); color:#fff; border-color:var(--wrong);}
 .count-pill{
@@ -322,6 +320,12 @@ button.btn:disabled{opacity:.45; cursor:not-allowed;}
   padding:7px 14px; border-radius:8px;
 }
 .sticky-bar button.btn{width:auto;}
+.submit-bottom-bar{
+  display:flex; justify-content:center; align-items:center; gap:14px; flex-wrap:wrap;
+  padding:18px 16px; margin:8px 0 14px; border:1px solid var(--line-strong); border-radius:14px;
+  background:linear-gradient(180deg, #fff, var(--linen)); box-shadow:var(--shadow);
+}
+.submit-bottom-bar button.btn{width:auto; padding:13px 30px; font-size:13.5px;}
 
 .result-hero{
   text-align:center; padding:30px 18px; border-radius:var(--radius); background:linear-gradient(160deg,#fff,var(--linen));
@@ -640,9 +644,7 @@ function renderExamRun(deId){
     <div class="sticky-bar">
       <div class="left">
         <span class="timer-pill" id="examTimer-${deId}">--:--</span>
-        <span class="count-pill" id="examAnsweredCount-${deId}"></span>
       </div>
-      <button class="btn primary" id="examSubmit-${deId}" style="width:auto;">Nộp bài</button>
     </div>
     <div class="warn-banner" id="examWarn-${deId}"></div>
   `;
@@ -653,6 +655,12 @@ function renderExamRun(deId){
       <div id="examOptions-${deId}-${i}"></div>
     </div>`;
   });
+  html += `
+    <div class="submit-bottom-bar">
+      <span class="count-pill" id="examAnsweredCount-${deId}"></span>
+      <button class="btn primary" id="examSubmit-${deId}" style="width:auto;">Nộp bài</button>
+    </div>
+  `;
   content.innerHTML = html;
 
   st.questions.forEach((eq,i)=>{
@@ -851,9 +859,7 @@ function renderTongHopRun(){
     <div class="sticky-bar">
       <div class="left">
         <span class="timer-pill" id="tonghopTimer">--:--</span>
-        <span class="count-pill" id="tonghopAnsweredCount"></span>
       </div>
-      <button class="btn gold" id="tonghopSubmit" style="width:auto;">Nộp bài</button>
     </div>
     <div class="warn-banner" id="tonghopWarn"></div>
   `;
@@ -864,6 +870,12 @@ function renderTongHopRun(){
       <div id="tonghopOptions-${i}"></div>
     </div>`;
   });
+  html += `
+    <div class="submit-bottom-bar">
+      <span class="count-pill" id="tonghopAnsweredCount"></span>
+      <button class="btn gold" id="tonghopSubmit" style="width:auto;">Nộp bài</button>
+    </div>
+  `;
   content.innerHTML = html;
 
   st.questions.forEach((eq,i)=>{
