@@ -458,16 +458,18 @@ function shuffledOptions(q){
 function openDeModal(deId, submode){
   document.getElementById('deModal').classList.add('open');
   document.body.style.overflow = 'hidden';
-  renderDePage(deId, submode);
+  const r = rt(deId);
+  // if this đề already has an exam in progress, always resume it (don't lose progress)
+  const effectiveSubmode = (r.examState && r.examState.questions) ? 'exam' : submode;
+  renderDePage(deId, effectiveSubmode);
 }
 function closeDeModal(){
   document.getElementById('deModal').classList.remove('open');
   document.body.style.overflow = '';
-  // stop any running exam timer for whichever đề was open
+  // pause timers while closed, but KEEP exam progress so it resumes on reopen
   Object.keys(runtime).forEach(deId=>{
     const st = runtime[deId].examState;
-    if(st && st.timerHandle) clearInterval(st.timerHandle);
-    runtime[deId].examState = null;
+    if(st && st.timerHandle){ clearInterval(st.timerHandle); st.timerHandle = null; }
   });
 }
 function scrollToTop(){
@@ -505,9 +507,8 @@ function renderHome(){
   });
 }
 document.getElementById('deModalClose').addEventListener('click', closeDeModal);
-document.getElementById('deModal').addEventListener('click', (e)=>{
-  if(e.target.id === 'deModal') closeDeModal();
-});
+// Clicking the dark overlay margins no longer closes the modal (was accidentally
+// kicking users back to the home screen and losing exam progress). Only the ✕ closes it.
 
 /* ================= ĐỀ PAGE (practice + exam) ================= */
 const runtime = {}; // { de1: { examState:null } }
@@ -541,7 +542,20 @@ function renderDePage(deId, submode){
   });
 
   if(submode === 'practice') renderPractice(deId);
-  else renderExamSetup(deId);
+  else resumeOrSetupExam(deId);
+}
+
+function resumeOrSetupExam(deId){
+  const r = rt(deId);
+  if(r.examState && r.examState.questions){
+    // resume an in-progress exam exactly where it was left off
+    renderExamRun(deId);
+    if(r.examState.timerHandle) clearInterval(r.examState.timerHandle);
+    r.examState.timerHandle = setInterval(()=>tickExamTimer(deId), 1000);
+    tickExamTimer(deId);
+  } else {
+    renderExamSetup(deId);
+  }
 }
 
 /* ---------- PRACTICE (scrolling list) ---------- */
@@ -802,19 +816,26 @@ let tongHopState = null;
 function openTongHopModal(){
   document.getElementById('tonghopModal').classList.add('open');
   document.body.style.overflow = 'hidden';
-  renderTongHopSetup();
+  if(tongHopState && tongHopState.questions){
+    // resume an in-progress tổng hợp exam instead of starting a new random one
+    renderTongHopRun();
+    if(tongHopState.timerHandle) clearInterval(tongHopState.timerHandle);
+    tongHopState.timerHandle = setInterval(tickTongHopTimer, 1000);
+    tickTongHopTimer();
+  } else {
+    renderTongHopSetup();
+  }
 }
 function closeTongHopModal(){
   document.getElementById('tonghopModal').classList.remove('open');
   document.body.style.overflow = '';
-  if(tongHopState && tongHopState.timerHandle) clearInterval(tongHopState.timerHandle);
-  tongHopState = null;
+  // pause timer while closed, but KEEP progress so it resumes on reopen
+  if(tongHopState && tongHopState.timerHandle){ clearInterval(tongHopState.timerHandle); tongHopState.timerHandle = null; }
 }
 document.getElementById('goTongHop').addEventListener('click', openTongHopModal);
 document.getElementById('tonghopModalClose').addEventListener('click', closeTongHopModal);
-document.getElementById('tonghopModal').addEventListener('click', (e)=>{
-  if(e.target.id === 'tonghopModal') closeTongHopModal();
-});
+// Clicking the dark overlay margins no longer closes the modal (was accidentally
+// kicking users back to the home screen and losing exam progress). Only the ✕ closes it.
 
 function renderTongHopSetup(){
   const content = document.getElementById('tonghopContent');
